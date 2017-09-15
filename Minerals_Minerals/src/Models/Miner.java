@@ -11,5 +11,8 @@ package Models;
  */
 public class Miner
 {
+
+    public Miner() {
+    }
     
 }

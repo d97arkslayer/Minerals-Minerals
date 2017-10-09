@@ -5,17 +5,37 @@
  */
 package Views;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Toolkit;
+
 /**
  *
  * @author Chinche
  */
-public class Panel extends javax.swing.JPanel {
+public class Panel extends javax.swing.JPanel
+{
+
+    private String name = "Esteban";
 
     /**
      * Creates new form Panel
      */
-    public Panel() {
+    public Panel(int h, int w)
+    {
         initComponents();
+        this.setPreferredSize(new Dimension(w, h));
+
+    }
+
+    @Override
+    protected void paintComponent(Graphics g)
+    {
+        super.paintComponent(g); //To change body of generated methods, choose Tools | Templates.
+        g.setColor(Color.red);
+        g.drawString(getName(), 100, 100);
+        repaint();
     }
 
     /**
@@ -40,6 +60,22 @@ public class Panel extends javax.swing.JPanel {
             .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    /**
+     * @return the name
+     */
+    public String getName()
+    {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name)
+    {
+        this.name = name;
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

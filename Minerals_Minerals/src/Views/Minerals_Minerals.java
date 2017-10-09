@@ -5,7 +5,13 @@
  */
 package Views;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.Toolkit;
 import java.util.LinkedList;
 import javax.swing.JPanel;
 
@@ -15,14 +21,29 @@ import javax.swing.JPanel;
  */
 public class Minerals_Minerals extends javax.swing.JFrame
 {
-    int countMinas=1;
-    LinkedList<JPanel> Panels=new LinkedList<>();
+
+    int countMines = 1;
+    LinkedList<JPanel> panels = new LinkedList<>();
+    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
     /**
      * Creates new form Minerals_Minerals
      */
     public Minerals_Minerals()
     {
+        this.setDefaultCloseOperation(Minerals_Minerals.EXIT_ON_CLOSE);
         initComponents();
+        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+        if (gd.isFullScreenSupported())
+        {
+            this.setSize(screenSize);
+            this.setResizable(false);
+            gd.setFullScreenWindow(this);
+        }
+        this.setTitle("Minerals & Minerals");
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("../Images/miner_logo.png")));
+        // this.setSize(screenSize);
+
     }
 
     /**
@@ -32,7 +53,8 @@ public class Minerals_Minerals extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -48,8 +70,10 @@ public class Minerals_Minerals extends javax.swing.JFrame
         jMenu2.setText("Acciones");
 
         jMenuItem1.setText("Agregar Mina");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jMenuItem1ActionPerformed(evt);
             }
         });
@@ -63,28 +87,27 @@ public class Minerals_Minerals extends javax.swing.JFrame
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-       this.Panels.add(new JPanel());
-       Panel pAux=new Panel();
-       this.Panels.getLast().add(pAux);
-       this.jTabbedPane1.add("Mina "+this.countMinas,this.Panels.getLast());
-       this.countMinas++;
+        JPanel jp = new JPanel();
+        jp.setBackground(Color.BLUE);
+        Panel pAux = new Panel((int) (this.screenSize.getWidth()), (int) (this.screenSize.height));
+        jp.removeAll();
+        ((FlowLayout) jp.getLayout()).setAlignment(FlowLayout.LEADING);
+        jp.add(pAux);
+        this.panels.add(jp);
+
+        this.jTabbedPane1.add("Mina " + this.countMines, this.panels.getLast());
+        this.countMines++;
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**

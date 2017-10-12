@@ -92,7 +92,7 @@ public class Minerals_Minerals extends javax.swing.JFrame
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         
         TypeMetal t = new TypeMetal(this, true);
-        Mine mine = new Mine(countMines, t.getMetal());
+        Mine mine = new Mine(this.countMines, t.getMetal());
         Maker m = new Maker(this, true);
         JPanel jp = new JPanel();
         jp.setBackground(Color.BLUE);

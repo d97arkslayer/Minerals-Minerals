@@ -20,11 +20,12 @@ public class TypeMetal extends javax.swing.JDialog
     public TypeMetal(java.awt.Frame parent, boolean modal)
     {
         super(parent, modal);
+        this.metal="";
         initComponents();
         this.setTitle("Metal");
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-        this.metal = "";
+        
     }
 
     /**

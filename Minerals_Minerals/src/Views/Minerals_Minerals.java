@@ -5,12 +5,10 @@
  */
 package Views;
 
-import java.awt.BorderLayout;
+import Models.Mine;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
 import java.util.LinkedList;
 import javax.swing.JPanel;
@@ -31,19 +29,13 @@ public class Minerals_Minerals extends javax.swing.JFrame
      */
     public Minerals_Minerals()
     {
-        this.setDefaultCloseOperation(Minerals_Minerals.EXIT_ON_CLOSE);
+
         initComponents();
-        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-        if (gd.isFullScreenSupported())
-        {
-            this.setSize(screenSize);
-            this.setResizable(false);
-            gd.setFullScreenWindow(this);
-        }
+        this.setDefaultCloseOperation(Minerals_Minerals.EXIT_ON_CLOSE);
+        this.setSize((int) (screenSize.getWidth()) - 40, (int) (screenSize.getHeight()) - 40);
+        this.setResizable(false);
         this.setTitle("Minerals & Minerals");
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("../Images/miner_logo.png")));
-        // this.setSize(screenSize);
-
     }
 
     /**
@@ -98,6 +90,10 @@ public class Minerals_Minerals extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        
+        TypeMetal t = new TypeMetal(this, true);
+        Mine mine = new Mine(countMines, t.getMetal());
+        Maker m = new Maker(this, true);
         JPanel jp = new JPanel();
         jp.setBackground(Color.BLUE);
         Panel pAux = new Panel((int) (this.screenSize.getWidth()), (int) (this.screenSize.height));
@@ -105,9 +101,9 @@ public class Minerals_Minerals extends javax.swing.JFrame
         ((FlowLayout) jp.getLayout()).setAlignment(FlowLayout.LEADING);
         jp.add(pAux);
         this.panels.add(jp);
-
         this.jTabbedPane1.add("Mina " + this.countMines, this.panels.getLast());
         this.countMines++;
+        System.out.println(mine.getMetal()+ "----------------------------------------------");
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**

@@ -93,12 +93,13 @@ public class Minerals_Minerals extends javax.swing.JFrame
         
         TypeMetal t = new TypeMetal(this, true);
         Mine mine = new Mine(this.countMines, t.getMetal());
-        Maker m = new Maker(this, true);
+        Maker m = new Maker(this, true,mine);
         JPanel jp = new JPanel();
         jp.setBackground(Color.BLUE);
         Panel pAux = new Panel((int) (this.screenSize.getWidth()), (int) (this.screenSize.height));
         jp.removeAll();
         ((FlowLayout) jp.getLayout()).setAlignment(FlowLayout.LEADING);
+        pAux.setMine(mine);
         jp.add(pAux);
         this.panels.add(jp);
         this.jTabbedPane1.add("Mina " + this.countMines, this.panels.getLast());

@@ -5,15 +5,17 @@
  */
 package Views;
 
+import Models.*;
 import java.awt.Color;
+import java.awt.Graphics;
 
 /**
  *
  * @author darkd
  */
-public class PanelMaker extends javax.swing.JPanel
+public class PanelMaker <T> extends javax.swing.JPanel 
 {
-
+    private Mine mine;
     /**
      * Creates new form PanelMaker
      */
@@ -44,6 +46,45 @@ public class PanelMaker extends javax.swing.JPanel
             .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g); 
+        for (int i = 0; i < this.mine.getMatrix().size(); i++) {
+            for (int j = 0; j < this.mine.getMatrix().get(i).size(); j++) {
+                if(this.mine.getMatrix().get(i).get(j).getObject() instanceof Wall){
+                    Wall w= (Wall)this.mine.getMatrix().get(i).get(j).getObject();
+                    g.drawImage(w.getImage().getImage(), w.getX(), w.getY(), w.getWidth(), w.getHeight(), this);
+                }
+                if(this.mine.getMatrix().get(i).get(j).getObject() instanceof Path){
+                    Path p= (Path)this.mine.getMatrix().get(i).get(j).getObject();
+                    g.drawImage(p.getImage().getImage(), p.getX(), p.getY(), p.getWidth(), p.getHeight(), this);
+                }
+                if(this.mine.getMatrix().get(i).get(j).getObject() instanceof Deposit){
+                    Deposit d= (Deposit)this.mine.getMatrix().get(i).get(j).getObject();
+                    g.drawImage(d.getImage().getImage(), d.getX(), d.getY(), d.getWidth(), d.getHeigth(), this);
+                }
+            }
+        }
+        repaint();
+    }
+
+    
+    
+    
+    /**
+     * @return the mine
+     */
+    public Mine getMine() {
+        return mine;
+    }
+
+    /**
+     * @param mine the mine to set
+     */
+    public void setMine(Mine mine) {
+        this.mine = mine;
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

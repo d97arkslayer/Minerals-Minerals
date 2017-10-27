@@ -5,6 +5,8 @@
  */
 package Models;
 
+import java.util.LinkedList;
+
 /**
  *
  * @author darkd
@@ -13,15 +15,18 @@ public class Mine
 {
     private int id;
     private String metal;
+    private LinkedList<LinkedList<SectionMap>> matrix;
 
     public Mine()
     {
+        this.matrix=new LinkedList<>();
     }
 
     public Mine(int id, String metal)
     {
         this.id = id;
         this.metal = metal;
+        this.matrix=new LinkedList<>();
     }
 
     /**
@@ -55,6 +60,23 @@ public class Mine
     {
         this.metal = metal;
     }
-    
+
+    /**
+     * @return the matrix
+     */
+    public LinkedList<LinkedList<SectionMap>> getMatrix() {
+        return matrix;
+    }
+
+    /**
+     * @param matrix the matrix to set
+     */
+    public void setMatrix(LinkedList<LinkedList<SectionMap>> matrix) {
+        this.matrix = matrix;
+    }
+
+    /**
+     * @return the matrix
+     */
     
 }

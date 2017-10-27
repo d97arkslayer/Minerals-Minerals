@@ -5,6 +5,8 @@
  */
 package Views;
 
+import Models.Mine;
+import Models.Wall;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -16,8 +18,7 @@ import java.awt.Toolkit;
  */
 public class Panel extends javax.swing.JPanel
 {
-
-    private String name = "Esteban";
+    private Mine mine=new Mine();
 
     /**
      * Creates new form Panel
@@ -33,8 +34,14 @@ public class Panel extends javax.swing.JPanel
     protected void paintComponent(Graphics g)
     {
         super.paintComponent(g); //To change body of generated methods, choose Tools | Templates.
-        g.setColor(Color.red);
-        g.drawString(getName(), 100, 100);
+         for (int i = 0; i < this.mine.getMatrix().size(); i++) {
+            for (int j = 0; j < this.mine.getMatrix().get(i).size(); j++) {
+                if(this.mine.getMatrix().get(i).get(j).getObject() instanceof Wall){
+                    Wall w= (Wall)this.mine.getMatrix().get(i).get(j).getObject();
+                    g.drawImage(w.getImage().getImage(), w.getX(), w.getY(), w.getWidth(), w.getHeight(), this);
+                }
+            }
+        }
         repaint();
     }
 
@@ -62,19 +69,17 @@ public class Panel extends javax.swing.JPanel
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * @return the name
+     * @return the mine
      */
-    public String getName()
-    {
-        return name;
+    public Mine getMine() {
+        return mine;
     }
 
     /**
-     * @param name the name to set
+     * @param mine the mine to set
      */
-    public void setName(String name)
-    {
-        this.name = name;
+    public void setMine(Mine mine) {
+        this.mine = mine;
     }
 
 

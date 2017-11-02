@@ -13,20 +13,21 @@ import java.util.LinkedList;
  */
 public class Mine
 {
+
     private int id;
     private String metal;
     private LinkedList<LinkedList<SectionMap>> matrix;
 
     public Mine()
     {
-        this.matrix=new LinkedList<>();
+        this.matrix = new LinkedList<>();
     }
 
     public Mine(int id, String metal)
     {
         this.id = id;
         this.metal = metal;
-        this.matrix=new LinkedList<>();
+        this.matrix = new LinkedList<>();
     }
 
     /**
@@ -64,19 +65,20 @@ public class Mine
     /**
      * @return the matrix
      */
-    public LinkedList<LinkedList<SectionMap>> getMatrix() {
+    public LinkedList<LinkedList<SectionMap>> getMatrix()
+    {
         return matrix;
     }
 
     /**
      * @param matrix the matrix to set
      */
-    public void setMatrix(LinkedList<LinkedList<SectionMap>> matrix) {
+    public void setMatrix(LinkedList<LinkedList<SectionMap>> matrix)
+    {
         this.matrix = matrix;
     }
 
     /**
      * @return the matrix
      */
-    
 }

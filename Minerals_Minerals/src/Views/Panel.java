@@ -5,7 +5,9 @@
  */
 package Views;
 
+import Models.Deposit;
 import Models.Mine;
+import Models.Road;
 import Models.Wall;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -16,10 +18,14 @@ import java.awt.Graphics;
  */
 public class Panel extends javax.swing.JPanel
 {
-    private Mine mine=new Mine();
+
+    private Mine mine = new Mine();
 
     /**
      * Creates new form Panel
+     *
+     * @param h
+     * @param w
      */
     public Panel(int h, int w)
     {
@@ -32,11 +38,25 @@ public class Panel extends javax.swing.JPanel
     protected void paintComponent(Graphics g)
     {
         super.paintComponent(g); //To change body of generated methods, choose Tools | Templates.
-         for (int i = 0; i < this.mine.getMatrix().size(); i++) {
-            for (int j = 0; j < this.mine.getMatrix().get(i).size(); j++) {
-                if(this.mine.getMatrix().get(i).get(j).getObject() instanceof Wall){
-                    Wall w= (Wall)this.mine.getMatrix().get(i).get(j).getObject();
+        for (int i = 0; i < this.mine.getMatrix().size(); i++)
+        {
+            for (int j = 0; j < this.mine.getMatrix().get(i).size(); j++)
+            {
+
+                if (this.mine.getMatrix().get(i).get(j).getObject() instanceof Wall)
+                {
+                    Wall w = (Wall) this.mine.getMatrix().get(i).get(j).getObject();
                     g.drawImage(w.getImage().getImage(), w.getX(), w.getY(), w.getWidth(), w.getHeight(), this);
+                }
+                else if (this.mine.getMatrix().get(i).get(j).getObject() instanceof Road)
+                {
+                    Road road = (Road) this.mine.getMatrix().get(i).get(j).getObject();
+                    g.drawImage(road.getImage().getImage(), road.getX(), road.getY(), road.getWidth(), road.getHeight(), this);
+                }
+                else if (this.mine.getMatrix().get(i).get(j).getObject() instanceof Deposit)
+                {
+                    Deposit deposit = (Deposit) this.mine.getMatrix().get(i).get(j).getObject();
+                    g.drawImage(deposit.getImage().getImage(), deposit.getX(), deposit.getY(), deposit.getWidth(), deposit.getHeight(), this);
                 }
             }
         }
@@ -69,14 +89,16 @@ public class Panel extends javax.swing.JPanel
     /**
      * @return the mine
      */
-    public Mine getMine() {
+    public Mine getMine()
+    {
         return mine;
     }
 
     /**
      * @param mine the mine to set
      */
-    public void setMine(Mine mine) {
+    public void setMine(Mine mine)
+    {
         this.mine = mine;
     }
 

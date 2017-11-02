@@ -12,8 +12,9 @@ import java.awt.Graphics;
 /**
  *
  * @author darkd
+ * @param <T>
  */
-public class PanelBuilder<T> extends javax.swing.JPanel
+public class PanelOfBuilder<T> extends javax.swing.JPanel
 {
 
     private Mine mine;
@@ -21,7 +22,7 @@ public class PanelBuilder<T> extends javax.swing.JPanel
     /**
      * Creates new form PanelMaker
      */
-    public PanelBuilder()
+    public PanelOfBuilder()
     {
         initComponents();
         this.setBackground(Color.black);
@@ -64,15 +65,15 @@ public class PanelBuilder<T> extends javax.swing.JPanel
                         Wall w = (Wall) this.mine.getMatrix().get(i).get(j).getObject();
                         g.drawImage(w.getImage().getImage(), w.getX(), w.getY(), w.getWidth(), w.getHeight(), this);
                     }
-                    if (this.mine.getMatrix().get(i).get(j).getObject() instanceof Path)
+                    if (this.mine.getMatrix().get(i).get(j).getObject() instanceof Road)
                     {
-                        Path p = (Path) this.mine.getMatrix().get(i).get(j).getObject();
+                        Road p = (Road) this.mine.getMatrix().get(i).get(j).getObject();
                         g.drawImage(p.getImage().getImage(), p.getX(), p.getY(), p.getWidth(), p.getHeight(), this);
                     }
                     if (this.mine.getMatrix().get(i).get(j).getObject() instanceof Deposit)
                     {
                         Deposit d = (Deposit) this.mine.getMatrix().get(i).get(j).getObject();
-                        g.drawImage(d.getImage().getImage(), d.getX(), d.getY(), d.getWidth(), d.getHeigth(), this);
+                        g.drawImage(d.getImage().getImage(), d.getX(), d.getY(), d.getWidth(), d.getHeight(), this);
                     }
                 }
             }

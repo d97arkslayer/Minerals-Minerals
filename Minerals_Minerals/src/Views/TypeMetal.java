@@ -5,27 +5,29 @@
  */
 package Views;
 
-import Models.Mine;
-
 /**
  *
  * @author darkd
  */
 public class TypeMetal extends javax.swing.JDialog
 {
+
     private String metal;
+
     /**
      * Creates new form TypeMetal
+     * @param parent
+     * @param modal
      */
     public TypeMetal(java.awt.Frame parent, boolean modal)
     {
         super(parent, modal);
-        this.metal="";
+        this.metal = "";
         initComponents();
         this.setTitle("Metal");
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-        
+
     }
 
     /**
@@ -121,19 +123,19 @@ public class TypeMetal extends javax.swing.JDialog
 
     private void buttonPlataActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_buttonPlataActionPerformed
     {//GEN-HEADEREND:event_buttonPlataActionPerformed
-        this.metal= "plata";
+        this.metal = "plata";
         this.setVisible(false);
     }//GEN-LAST:event_buttonPlataActionPerformed
 
     private void buttonOroActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_buttonOroActionPerformed
     {//GEN-HEADEREND:event_buttonOroActionPerformed
-      this.metal= "oro";
+        this.metal = "oro";
         this.setVisible(false);
     }//GEN-LAST:event_buttonOroActionPerformed
 
     private void buttonCobreActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_buttonCobreActionPerformed
     {//GEN-HEADEREND:event_buttonCobreActionPerformed
-        this.metal= "cobre";
+        this.metal = "cobre";
         this.setVisible(false);
     }//GEN-LAST:event_buttonCobreActionPerformed
 

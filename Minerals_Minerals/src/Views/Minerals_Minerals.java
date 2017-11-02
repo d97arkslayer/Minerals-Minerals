@@ -90,10 +90,10 @@ public class Minerals_Minerals extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        
+
         TypeMetal t = new TypeMetal(this, true);
         Mine mine = new Mine(this.countMines, t.getMetal());
-        Builder m = new Builder(this, true,mine);
+        Builder m = new Builder(this, true, mine);
         JPanel jp = new JPanel();
         jp.setBackground(Color.BLUE);
         Panel pAux = new Panel((int) (this.screenSize.getWidth()), (int) (this.screenSize.height));

@@ -23,6 +23,7 @@ public class Builder extends java.awt.Dialog
      *
      * @param parent
      * @param modal
+     * @param m
      */
     public Builder(java.awt.Frame parent, boolean modal, Mine m)
     {
@@ -50,14 +51,14 @@ public class Builder extends java.awt.Dialog
     {
 
         jPanel1 = new javax.swing.JPanel();
-        panelMaker1 = new Views.PanelBuilder();
+        panelMaker1 = new Views.PanelOfBuilder();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnAddWidth = new javax.swing.JButton();
+        btnLessWidth = new javax.swing.JButton();
+        btnAddHeight = new javax.swing.JButton();
+        btnLessHeight = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
@@ -104,47 +105,47 @@ public class Builder extends java.awt.Dialog
         jLabel3.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jLabel3.setText(" Alto");
 
-        jButton1.setBackground(new java.awt.Color(204, 204, 204));
-        jButton1.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        jButton1.setText("+");
-        jButton1.addActionListener(new java.awt.event.ActionListener()
+        btnAddWidth.setBackground(new java.awt.Color(204, 204, 204));
+        btnAddWidth.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        btnAddWidth.setText("+");
+        btnAddWidth.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jButton1ActionPerformed(evt);
+                btnAddWidthActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(204, 204, 204));
-        jButton3.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        jButton3.setText("-");
-        jButton3.addActionListener(new java.awt.event.ActionListener()
+        btnLessWidth.setBackground(new java.awt.Color(204, 204, 204));
+        btnLessWidth.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        btnLessWidth.setText("-");
+        btnLessWidth.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jButton3ActionPerformed(evt);
+                btnLessWidthActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(204, 204, 204));
-        jButton2.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        jButton2.setText("+");
-        jButton2.addActionListener(new java.awt.event.ActionListener()
+        btnAddHeight.setBackground(new java.awt.Color(204, 204, 204));
+        btnAddHeight.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        btnAddHeight.setText("+");
+        btnAddHeight.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jButton2ActionPerformed(evt);
+                btnAddHeightActionPerformed(evt);
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(204, 204, 204));
-        jButton4.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        jButton4.setText("-");
-        jButton4.addActionListener(new java.awt.event.ActionListener()
+        btnLessHeight.setBackground(new java.awt.Color(204, 204, 204));
+        btnLessHeight.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        btnLessHeight.setText("-");
+        btnLessHeight.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jButton4ActionPerformed(evt);
+                btnLessHeightActionPerformed(evt);
             }
         });
 
@@ -211,12 +212,12 @@ public class Builder extends java.awt.Dialog
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2)
+                            .addComponent(btnAddHeight)
                             .addComponent(jLabel3)
-                            .addComponent(jButton4)
+                            .addComponent(btnLessHeight)
                             .addComponent(jLabel2)
-                            .addComponent(jButton1)
-                            .addComponent(jButton3))))
+                            .addComponent(btnAddWidth)
+                            .addComponent(btnLessWidth))))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -227,17 +228,17 @@ public class Builder extends java.awt.Dialog
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAddWidth, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnLessWidth, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(24, 24, 24)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAddHeight, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnLessHeight, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -285,35 +286,78 @@ public class Builder extends java.awt.Dialog
         dispose();
     }//GEN-LAST:event_jButton9ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnAddWidthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddWidthActionPerformed
         for (int i = 0; i < this.mine.getMatrix().size(); i++)
         {
-            Wall w = (Wall) this.mine.getMatrix().get(i).getLast().getObject();
-            this.mine.getMatrix().get(i).add(new SectionMap(new Wall(w.getX() + w.getWidth(), w.getY())));
+            int x = 0, width = 0, y = 0;
+            if (this.mine.getMatrix().get(i).getLast().getObject() instanceof Wall)
+            {
+                Wall w = (Wall) this.mine.getMatrix().get(i).getLast().getObject();
+                x = w.getX();
+                width = w.getWidth();
+                y = w.getY();
+            }
+            else if (this.mine.getMatrix().get(i).getLast().getObject() instanceof Road)
+            {
+                Road w = (Road) this.mine.getMatrix().get(i).getLast().getObject();
+                x = w.getX();
+                width = w.getWidth();
+                y = w.getY();
+            }
+            else if (this.mine.getMatrix().get(i).getLast().getObject() instanceof Deposit)
+            {
+                Deposit w = (Deposit) this.mine.getMatrix().get(i).getLast().getObject();
+                x = w.getX();
+                width = w.getWidth();
+                y = w.getY();
+            }
+
+            this.mine.getMatrix().get(i).add(new SectionMap(new Wall(x + width, y)));
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnAddWidthActionPerformed
+    private void btnLessWidthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLessWidthActionPerformed
         for (int i = 0; i < this.mine.getMatrix().size(); i++)
         {
             this.mine.getMatrix().get(i).removeLast();
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnLessWidthActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnAddHeightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddHeightActionPerformed
         LinkedList<SectionMap> l = new LinkedList<>();
-        int position = 0;
-        Wall w = (Wall) this.mine.getMatrix().getLast().getFirst().getObject();
-        for (int i = 0; i < this.mine.getMatrix().getFirst().size(); i++)
+        int position = 0, width = 0, height = 0, y = 0;
+        if (this.mine.getMatrix().getLast().getFirst().getObject() instanceof Wall)
         {
-            l.add(new SectionMap(new Wall(position, w.getY() + w.getHeight())));
-            position += w.getWidth();
+            Wall w = (Wall) this.mine.getMatrix().getLast().getFirst().getObject();
+            width = w.getWidth();
+            height = w.getHeight();
+            y = w.getY();
+        }
+        else if (this.mine.getMatrix().getLast().getFirst().getObject() instanceof Deposit)
+        {
+            Deposit w = (Deposit) this.mine.getMatrix().getLast().getFirst().getObject();
+            width = w.getWidth();
+            height = w.getHeight();
+            y = w.getY();
+        }
+        else if (this.mine.getMatrix().getLast().getFirst().getObject() instanceof Road)
+        {
+            Road w = (Road) this.mine.getMatrix().getLast().getFirst().getObject();
+            width = w.getWidth();
+            height = w.getHeight();
+            y = w.getY();
+        }
+
+        for (SectionMap first : this.mine.getMatrix().getFirst())
+        {
+            l.add(new SectionMap(new Wall(position, y + height)));
+            position += width;
         }
         this.mine.getMatrix().add(l);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnAddHeightActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnLessHeightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLessHeightActionPerformed
         this.mine.getMatrix().removeLast();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnLessHeightActionPerformed
 
     private void panelMaker1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelMaker1MouseClicked
         for (int i = 0; i < this.mine.getMatrix().size(); i++)
@@ -326,7 +370,28 @@ public class Builder extends java.awt.Dialog
                     Rectangle r = new Rectangle(w.getX(), w.getY(), w.getWidth(), w.getHeight());
                     if (r.intersects(new Rectangle(evt.getX(), evt.getY(), 1, 1)))
                     {
-                        System.out.println("colision");
+                        Road road = new Road(w.getX(), w.getY());
+                        this.mine.getMatrix().get(i).get(j).setObject(road);
+                    }
+                }
+                else if (this.mine.getMatrix().get(i).get(j).getObject() instanceof Road)
+                {
+                    Road ro = (Road) this.mine.getMatrix().get(i).get(j).getObject();
+                    Rectangle r = new Rectangle(ro.getX(), ro.getY(), ro.getWidth(), ro.getHeight());
+                    if (r.intersects(new Rectangle(evt.getX(), evt.getY(), 1, 1)))
+                    {
+                        Deposit deposit = new Deposit(ro.getX(), ro.getY());
+                        this.mine.getMatrix().get(i).get(j).setObject(deposit);
+                    }
+                }
+                else if (this.mine.getMatrix().get(i).get(j).getObject() instanceof Deposit)
+                {
+                    Deposit d = (Deposit) this.mine.getMatrix().get(i).get(j).getObject();
+                    Rectangle r = new Rectangle(d.getX(), d.getY(), d.getWidth(), d.getHeight());
+                    if (r.intersects(new Rectangle(evt.getX(), evt.getY(), 1, 1)))
+                    {
+                        Wall wall = new Wall(d.getX(), d.getY());
+                        this.mine.getMatrix().get(i).get(j).setObject(wall);
                     }
                 }
             }
@@ -357,10 +422,10 @@ public class Builder extends java.awt.Dialog
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btnAddHeight;
+    private javax.swing.JButton btnAddWidth;
+    private javax.swing.JButton btnLessHeight;
+    private javax.swing.JButton btnLessWidth;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
@@ -369,7 +434,7 @@ public class Builder extends java.awt.Dialog
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private Views.PanelBuilder panelMaker1;
+    private Views.PanelOfBuilder panelMaker1;
     // End of variables declaration//GEN-END:variables
 
     /**

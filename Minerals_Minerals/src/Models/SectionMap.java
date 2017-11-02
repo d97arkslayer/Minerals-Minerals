@@ -8,30 +8,36 @@ package Models;
 /**
  *
  * @author darkd
+ * @param <T>
  */
 public class SectionMap<T>
 {
-  private T Object;
 
-    public SectionMap() {
+    private T Object;
+
+    public SectionMap()
+    {
     }
 
-    public SectionMap(T Object) {
+    public SectionMap(T Object)
+    {
         this.Object = Object;
     }
 
     /**
      * @return the Object
      */
-    public T getObject() {
+    public T getObject()
+    {
         return Object;
     }
 
     /**
      * @param Object the Object to set
      */
-    public void setObject(T Object) {
+    public void setObject(T Object)
+    {
         this.Object = Object;
     }
-  
+
 }

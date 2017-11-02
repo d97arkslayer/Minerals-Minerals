@@ -7,10 +7,8 @@ package Views;
 
 import Models.Mine;
 import Models.Wall;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Toolkit;
 
 /**
  *

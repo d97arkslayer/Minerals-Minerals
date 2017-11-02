@@ -93,7 +93,7 @@ public class Minerals_Minerals extends javax.swing.JFrame
         
         TypeMetal t = new TypeMetal(this, true);
         Mine mine = new Mine(this.countMines, t.getMetal());
-        Maker m = new Maker(this, true,mine);
+        Builder m = new Builder(this, true,mine);
         JPanel jp = new JPanel();
         jp.setBackground(Color.BLUE);
         Panel pAux = new Panel((int) (this.screenSize.getWidth()), (int) (this.screenSize.height));
@@ -104,7 +104,6 @@ public class Minerals_Minerals extends javax.swing.JFrame
         this.panels.add(jp);
         this.jTabbedPane1.add("Mina " + this.countMines, this.panels.getLast());
         this.countMines++;
-        System.out.println(mine.getMetal()+ "----------------------------------------------");
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**

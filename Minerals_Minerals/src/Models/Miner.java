@@ -23,6 +23,7 @@ public class Miner implements Runnable
     private String[] work;
     private ImageIcon image;
     private boolean movement;
+    private String previousCollision;
 
     public Miner()
     {
@@ -39,6 +40,7 @@ public class Miner implements Runnable
         this.state = "mover";
         this.move = new String[2];
         this.work = new String[3];
+        this.previousCollision="S";
         LoadSprite();
     }
 
@@ -50,38 +52,44 @@ public class Miner implements Runnable
         switch (this.direction)
         {
             case 1:
-                this.move[0] = "../imagenes/miner_up1.png";
-                this.move[1] = "../imagenes/miner_up2.png";
-                this.work[0] = "../imagenes/miner_up_working1.png";
-                this.work[1] = "../imagenes/miner_up_working2.png";
-                this.work[2] = "../imagenes/miner_up_working3.png";
+                this.move[0] = "../Images/miner_up1.png";
+                this.move[1] = "../Images/miner_up2.png";
+                this.work[0] = "../Images/miner_up_working1.png";
+                this.work[1] = "../Images/miner_up_working2.png";
+                this.work[2] = "../Images/miner_up_working3.png";
                 this.image = new ImageIcon(getClass().getResource(this.move[0]));
                 break;
             case 2:
-                this.move[0] = "../imagenes/miner_right1.png";
-                this.move[1] = "../imagenes/miner_right2.png";
-                this.work[0] = "../imagenes/miner_right_working1.png";
-                this.work[1] = "../imagenes/miner_right_working2.png";
-                this.work[2] = "../imagenes/miner_right_working3.png";
+                this.move[0] = "../Images/miner_right1.png";
+                this.move[1] = "../Images/miner_right2.png";
+                this.work[0] = "../Images/miner_right_working1.png";
+                this.work[1] = "../Images/miner_right_working2.png";
+                this.work[2] = "../Images/miner_right_working3.png";
                 this.image = new ImageIcon(getClass().getResource(this.move[0]));
                 break;
             case 3:
-                this.move[0] = "../imagenes/miner_down1.png";
-                this.move[1] = "../imagenes/miner_down2.png";
-                this.work[0] = "../imagenes/miner_down_working1.png";
-                this.work[1] = "../imagenes/miner_down_working2.png";
-                this.work[2] = "../imagenes/miner_down_working3.png";
+                this.move[0] = "../Images/miner_down1.png";
+                this.move[1] = "../Images/miner_down2.png";
+                this.work[0] = "../Images/miner_down_working1.png";
+                this.work[1] = "../Images/miner_down_working2.png";
+                this.work[2] = "../Images/miner_down_working3.png";
                 this.image = new ImageIcon(getClass().getResource(this.move[0]));
                 break;
             case 4:
-                this.move[0] = "../imagenes/miner_left1.png";
-                this.move[1] = "../imagenes/miner_left2.png";
-                this.work[0] = "../imagenes/miner_left_working1.png";
-                this.work[1] = "../imagenes/miner_left_working2.png";
-                this.work[2] = "../imagenes/miner_left_working3.png";
+                this.move[0] = "../Images/miner_left1.png";
+                this.move[1] = "../Images/miner_left2.png";
+                this.work[0] = "../Images/miner_left_working1.png";
+                this.work[1] = "../Images/miner_left_working2.png";
+                this.work[2] = "../Images/miner_left_working3.png";
                 this.image = new ImageIcon(getClass().getResource(this.move[0]));
                 break;
         }
+    }
+    
+    public void ChangeDirection(int newDirection)
+    {
+        this.direction=newDirection;
+        LoadSprite();
     }
 
     /*
@@ -154,6 +162,7 @@ public class Miner implements Runnable
         }
     }
 
+    
     /**
      * @return the x
      */
@@ -330,4 +339,18 @@ public class Miner implements Runnable
         this.movement = movement;
     }
 
+    /**
+     * @return the previousCollision
+     */
+    public String getPreviousCollision() {
+        return previousCollision;
+    }
+
+    /**
+     * @param previousCollision the previousCollision to set
+     */
+    public void setPreviousCollision(String previousCollision) {
+        this.previousCollision = previousCollision;
+    }
+    
 }

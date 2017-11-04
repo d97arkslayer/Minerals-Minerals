@@ -19,18 +19,42 @@ public class Road
     private int width;
     private int height;
     private ImageIcon image;
+    private boolean entry;
+    private int locationEntry;
 
     public Road()
     {
     }
 
-    public Road(int x, int y)
+    public Road(int x, int y,boolean entry,int locationEntry)
     {
         this.x = x;
         this.y = y;
         this.width = 50;
         this.height = 50;
-        this.image = new ImageIcon(getClass().getResource("../Images/road.png"));
+        this.entry=entry;
+        this.locationEntry=locationEntry;
+        if(this.entry)
+        {
+            switch (this.locationEntry) 
+            {
+                case 1:
+                    this.image = new ImageIcon(getClass().getResource("../Images/left_entry.png"));
+                    break;
+                case 2:
+                    this.image = new ImageIcon(getClass().getResource("../Images/top_entry.png"));
+                    break;
+                case 3:
+                    this.image = new ImageIcon(getClass().getResource("../Images/right_entry.png"));
+                    break;
+                case 4:
+                    this.image = new ImageIcon(getClass().getResource("../Images/down_entry.png"));
+                    break;    
+            }
+        }else
+        {
+            this.image = new ImageIcon(getClass().getResource("../Images/road.png"));
+        }
     }
 
     /**
@@ -111,6 +135,34 @@ public class Road
     public void setImage(ImageIcon image)
     {
         this.image = image;
+    }
+
+    /**
+     * @return the entry
+     */
+    public boolean isEntry() {
+        return entry;
+    }
+
+    /**
+     * @param entry the entry to set
+     */
+    public void setEntry(boolean entry) {
+        this.entry = entry;
+    }
+
+    /**
+     * @return the locationEntry
+     */
+    public int getLocationEntry() {
+        return locationEntry;
+    }
+
+    /**
+     * @param locationEntry the locationEntry to set
+     */
+    public void setLocationEntry(int locationEntry) {
+        this.locationEntry = locationEntry;
     }
 
 }

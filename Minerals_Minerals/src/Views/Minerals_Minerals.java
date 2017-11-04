@@ -5,7 +5,7 @@
  */
 package Views;
 
-import Models.Mine;
+import Models.*;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -22,7 +22,10 @@ public class Minerals_Minerals extends javax.swing.JFrame
 
     int countMines = 1;
     LinkedList<JPanel> panels = new LinkedList<>();
+    LinkedList<Panel> pruebapanels = new LinkedList<>();
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    LinkedList<Thread> minersThreads=new LinkedList<>();
+    
 
     /**
      * Creates new form Minerals_Minerals
@@ -45,14 +48,15 @@ public class Minerals_Minerals extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,14 +66,28 @@ public class Minerals_Minerals extends javax.swing.JFrame
         jMenu2.setText("Acciones");
 
         jMenuItem1.setText("Agregar Mina");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
             }
         });
         jMenu2.add(jMenuItem1);
+
+        jMenuItem2.setText("Prueba Minero");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem2);
+
+        jMenuItem3.setText("Grafo");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem3);
 
         jMenuBar1.add(jMenu2);
 
@@ -100,11 +118,59 @@ public class Minerals_Minerals extends javax.swing.JFrame
         jp.removeAll();
         ((FlowLayout) jp.getLayout()).setAlignment(FlowLayout.LEADING);
         pAux.setMine(mine);
+        this.pruebapanels.add(pAux);
         jp.add(pAux);
         this.panels.add(jp);
         this.jTabbedPane1.add("Mina " + this.countMines, this.panels.getLast());
         this.countMines++;
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        for (int i = 0; i < this.pruebapanels.getFirst().getMine().getMatrix().size(); i++) 
+        {
+            for (int j = 0; j < this.pruebapanels.getFirst().getMine().getMatrix().get(i).size(); j++) 
+            {
+                if( this.pruebapanels.getFirst().getMine().getMatrix().get(i).get(j).getObject() instanceof  Road)
+                {
+                    Road road= (Road) this.pruebapanels.getFirst().getMine().getMatrix().get(i).get(j).getObject();
+                    if(road.isEntry())
+                    {
+                       switch (road.getLocationEntry()) 
+                       {
+                           case 1:
+                               this.pruebapanels.getFirst().getMine().getListMiners().add(new Miner(road.getX(), road.getY()+2, 2));
+                               this.pruebapanels.getFirst().getMine().getListMiners().getFirst().setMovement(true);
+                               this.minersThreads.add(new Thread(this.pruebapanels.getFirst().getMine().getListMiners().getFirst()));
+                               this.minersThreads.getFirst().start();
+                               break;
+                            case 2:
+                               this.pruebapanels.getFirst().getMine().getListMiners().add(new Miner(road.getX()+2, road.getY(), 3));
+                               this.pruebapanels.getFirst().getMine().getListMiners().getFirst().setMovement(true);
+                               this.minersThreads.add(new Thread(this.pruebapanels.getFirst().getMine().getListMiners().getFirst()));
+                               this.minersThreads.getFirst().start();
+                               break;
+                            case 3:
+                               this.pruebapanels.getFirst().getMine().getListMiners().add(new Miner(road.getX(), road.getY()+2, 4));
+                               this.pruebapanels.getFirst().getMine().getListMiners().getFirst().setMovement(true);
+                               this.minersThreads.add(new Thread(this.pruebapanels.getFirst().getMine().getListMiners().getFirst()));
+                               this.minersThreads.getFirst().start();
+                               break;
+                            case 4:
+                               this.pruebapanels.getFirst().getMine().getListMiners().add(new Miner(road.getX()+2, road.getY(), 1));
+                               this.pruebapanels.getFirst().getMine().getListMiners().getFirst().setMovement(true);
+                               this.minersThreads.add(new Thread(this.pruebapanels.getFirst().getMine().getListMiners().getFirst()));
+                               this.minersThreads.getFirst().start();
+                               break;
+                       }
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+       this.pruebapanels.getFirst().getMine().createGraph();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -160,6 +226,8 @@ public class Minerals_Minerals extends javax.swing.JFrame
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 }

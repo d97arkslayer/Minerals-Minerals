@@ -35,8 +35,9 @@ public class PanelOfBuilder<T> extends javax.swing.JPanel
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
+
+        setBackground(new java.awt.Color(0, 0, 102));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -55,29 +56,42 @@ public class PanelOfBuilder<T> extends javax.swing.JPanel
     {
         super.paintComponent(g);
         if (this.mine != null)
-        {
             for (int i = 0; i < this.mine.getMatrix().size(); i++)
             {
                 for (int j = 0; j < this.mine.getMatrix().get(i).size(); j++)
                 {
                     if (this.mine.getMatrix().get(i).get(j).getObject() instanceof Wall)
                     {
-                        Wall w = (Wall) this.mine.getMatrix().get(i).get(j).getObject();
-                        g.drawImage(w.getImage().getImage(), w.getX(), w.getY(), w.getWidth(), w.getHeight(), this);
+                        Wall p = (Wall) this.mine.getMatrix().get(i).get(j).getObject();
+                        g.setColor(Color.black);
+                        g.fillRect(p.getX(), p.getY(), p.getWidth(), p.getHeight());
+                        g.setColor(Color.white);
+                        g.drawRect(p.getX(), p.getY(), p.getWidth(), p.getHeight());
+                        //g.drawImage(p.getImage().getImage(), p.getX(), p.getY(), p.getWidth(), p.getHeight(), this);
                     }
                     if (this.mine.getMatrix().get(i).get(j).getObject() instanceof Road)
                     {
                         Road p = (Road) this.mine.getMatrix().get(i).get(j).getObject();
-                        g.drawImage(p.getImage().getImage(), p.getX(), p.getY(), p.getWidth(), p.getHeight(), this);
+                        if (p.isEntry())
+                            g.setColor(Color.blue);
+                        else
+                            g.setColor(Color.yellow);
+                        g.fillRect(p.getX(), p.getY(), p.getWidth(), p.getHeight());
+                        g.setColor(Color.white);
+                        g.drawRect(p.getX(), p.getY(), p.getWidth(), p.getHeight());
+                        // g.drawImage(p.getImage().getImage(), p.getX(), p.getY(), p.getWidth(), p.getHeight(), this);
                     }
                     if (this.mine.getMatrix().get(i).get(j).getObject() instanceof Deposit)
                     {
                         Deposit d = (Deposit) this.mine.getMatrix().get(i).get(j).getObject();
-                        g.drawImage(d.getImage().getImage(), d.getX(), d.getY(), d.getWidth(), d.getHeight(), this);
+                        g.setColor(Color.green);
+                        g.fillRect(d.getX(), d.getY(), d.getWidth(), d.getHeight());
+                        g.setColor(Color.white);
+                        g.drawRect(d.getX(), d.getY(), d.getWidth(), d.getHeight());
+                        //g.drawImage(d.getImage().getImage(), d.getX(), d.getY(), d.getWidth(), d.getHeight(), this);
                     }
                 }
             }
-        }
         repaint();
     }
 

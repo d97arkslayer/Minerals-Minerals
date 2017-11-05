@@ -40,7 +40,7 @@ public class Miner implements Runnable
         this.state = "mover";
         this.move = new String[2];
         this.work = new String[3];
-        this.previousCollision="S";
+        this.previousCollision = "S";
         LoadSprite();
     }
 
@@ -85,10 +85,10 @@ public class Miner implements Runnable
                 break;
         }
     }
-    
+
     public void ChangeDirection(int newDirection)
     {
-        this.direction=newDirection;
+        this.direction = newDirection;
         LoadSprite();
     }
 
@@ -101,25 +101,17 @@ public class Miner implements Runnable
         {
             this.image = new ImageIcon(getClass().getResource(this.move[this.countAnimation]));
             if (this.countAnimation == 1)
-            {
                 this.countAnimation = 0;
-            }
             else
-            {
                 this.countAnimation++;
-            }
         }
         if (this.state.equalsIgnoreCase("trabajo"))
         {
             this.image = new ImageIcon(getClass().getResource(this.work[this.countAnimation]));
             if (this.countAnimation == 2)
-            {
                 this.countAnimation = 0;
-            }
             else
-            {
                 this.countAnimation++;
-            }
         }
     }
 
@@ -149,9 +141,7 @@ public class Miner implements Runnable
                 Sprite();
             }
             if (this.state.equalsIgnoreCase("trabajo"))
-            {
                 Sprite();
-            }
             try
             {
                 Thread.sleep(150);
@@ -162,7 +152,6 @@ public class Miner implements Runnable
         }
     }
 
-    
     /**
      * @return the x
      */
@@ -342,15 +331,17 @@ public class Miner implements Runnable
     /**
      * @return the previousCollision
      */
-    public String getPreviousCollision() {
+    public String getPreviousCollision()
+    {
         return previousCollision;
     }
 
     /**
      * @param previousCollision the previousCollision to set
      */
-    public void setPreviousCollision(String previousCollision) {
+    public void setPreviousCollision(String previousCollision)
+    {
         this.previousCollision = previousCollision;
     }
-    
+
 }

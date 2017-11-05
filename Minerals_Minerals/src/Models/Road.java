@@ -21,22 +21,25 @@ public class Road
     private ImageIcon image;
     private boolean entry;
     private int locationEntry;
+    private ImageIcon[] images;
 
     public Road()
     {
     }
 
-    public Road(int x, int y,boolean entry,int locationEntry)
+    public Road(int x, int y, boolean entry, int locationEntry)
     {
+
+        this.myRoadImages();
         this.x = x;
         this.y = y;
         this.width = 50;
         this.height = 50;
-        this.entry=entry;
-        this.locationEntry=locationEntry;
-        if(this.entry)
-        {
-            switch (this.locationEntry) 
+        this.entry = entry;
+        this.locationEntry = locationEntry;
+        this.image = new ImageIcon(getClass().getResource("../Images/road.png"));
+        if (this.entry)
+            switch (this.locationEntry)
             {
                 case 1:
                     this.image = new ImageIcon(getClass().getResource("../Images/left_entry.png"));
@@ -49,12 +52,26 @@ public class Road
                     break;
                 case 4:
                     this.image = new ImageIcon(getClass().getResource("../Images/down_entry.png"));
-                    break;    
+                    break;
             }
-        }else
-        {
-            this.image = new ImageIcon(getClass().getResource("../Images/road.png"));
-        }
+//        else
+//            this.image = new ImageIcon(getClass().getResource("../Images/road.png"));
+    }
+
+    public void myRoadImages()
+    {
+        this.setImages(new ImageIcon[11]);
+        this.getImages()[0] = new ImageIcon(getClass().getResource("../Images/Roads/verticalRail.png"));
+        this.getImages()[1] = new ImageIcon(getClass().getResource("../Images/Roads/horizontalRail.png"));
+        this.getImages()[2] = new ImageIcon(getClass().getResource("../Images/Roads/giro1Rail.png"));
+        this.getImages()[3] = new ImageIcon(getClass().getResource("../Images/Roads/giro2Rail.png"));
+        this.getImages()[4] = new ImageIcon(getClass().getResource("../Images/Roads/giro3Rail.png"));
+        this.getImages()[5] = new ImageIcon(getClass().getResource("../Images/Roads/giro4Rail.png"));
+        this.getImages()[6] = new ImageIcon(getClass().getResource("../Images/Roads/intersectionCrossRail.png"));
+        this.getImages()[7] = new ImageIcon(getClass().getResource("../Images/Roads/intersectionDownRail.png"));
+        this.getImages()[8] = new ImageIcon(getClass().getResource("../Images/Roads/intersectionLeftRail.png"));
+        this.getImages()[9] = new ImageIcon(getClass().getResource("../Images/Roads/intersectionRightRail.png"));
+        this.getImages()[10] = new ImageIcon(getClass().getResource("../Images/Roads/intersectionTopRail.png"));
     }
 
     /**
@@ -140,29 +157,49 @@ public class Road
     /**
      * @return the entry
      */
-    public boolean isEntry() {
+    public boolean isEntry()
+    {
         return entry;
     }
 
     /**
      * @param entry the entry to set
      */
-    public void setEntry(boolean entry) {
+    public void setEntry(boolean entry)
+    {
         this.entry = entry;
     }
 
     /**
      * @return the locationEntry
      */
-    public int getLocationEntry() {
+    public int getLocationEntry()
+    {
         return locationEntry;
     }
 
     /**
      * @param locationEntry the locationEntry to set
      */
-    public void setLocationEntry(int locationEntry) {
+    public void setLocationEntry(int locationEntry)
+    {
         this.locationEntry = locationEntry;
+    }
+
+    /**
+     * @return the images
+     */
+    public ImageIcon[] getImages()
+    {
+        return images;
+    }
+
+    /**
+     * @param images the images to set
+     */
+    public void setImages(ImageIcon[] images)
+    {
+        this.images = images;
     }
 
 }

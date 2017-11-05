@@ -24,8 +24,7 @@ public class Minerals_Minerals extends javax.swing.JFrame
     LinkedList<JPanel> panels = new LinkedList<>();
     LinkedList<Panel> pruebapanels = new LinkedList<>();
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    LinkedList<Thread> minersThreads=new LinkedList<>();
-    
+    LinkedList<Thread> minersThreads = new LinkedList<>();
 
     /**
      * Creates new form Minerals_Minerals
@@ -126,50 +125,48 @@ public class Minerals_Minerals extends javax.swing.JFrame
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        for (int i = 0; i < this.pruebapanels.getFirst().getMine().getMatrix().size(); i++) 
+        for (int i = 0; i < this.pruebapanels.getFirst().getMine().getMatrix().size(); i++)
         {
-            for (int j = 0; j < this.pruebapanels.getFirst().getMine().getMatrix().get(i).size(); j++) 
+            for (int j = 0; j < this.pruebapanels.getFirst().getMine().getMatrix().get(i).size(); j++)
             {
-                if( this.pruebapanels.getFirst().getMine().getMatrix().get(i).get(j).getObject() instanceof  Road)
+                if (this.pruebapanels.getFirst().getMine().getMatrix().get(i).get(j).getObject() instanceof Road)
                 {
-                    Road road= (Road) this.pruebapanels.getFirst().getMine().getMatrix().get(i).get(j).getObject();
-                    if(road.isEntry())
-                    {
-                       switch (road.getLocationEntry()) 
-                       {
-                           case 1:
-                               this.pruebapanels.getFirst().getMine().getListMiners().add(new Miner(road.getX(), road.getY()+2, 2));
-                               this.pruebapanels.getFirst().getMine().getListMiners().getFirst().setMovement(true);
-                               this.minersThreads.add(new Thread(this.pruebapanels.getFirst().getMine().getListMiners().getFirst()));
-                               this.minersThreads.getFirst().start();
-                               break;
+                    Road road = (Road) this.pruebapanels.getFirst().getMine().getMatrix().get(i).get(j).getObject();
+                    if (road.isEntry())
+                        switch (road.getLocationEntry())
+                        {
+                            case 1:
+                                this.pruebapanels.getFirst().getMine().getListMiners().add(new Miner(road.getX(), road.getY() + 2, 2));
+                                this.pruebapanels.getFirst().getMine().getListMiners().getFirst().setMovement(true);
+                                this.minersThreads.add(new Thread(this.pruebapanels.getFirst().getMine().getListMiners().getFirst()));
+                                this.minersThreads.getFirst().start();
+                                break;
                             case 2:
-                               this.pruebapanels.getFirst().getMine().getListMiners().add(new Miner(road.getX()+2, road.getY(), 3));
-                               this.pruebapanels.getFirst().getMine().getListMiners().getFirst().setMovement(true);
-                               this.minersThreads.add(new Thread(this.pruebapanels.getFirst().getMine().getListMiners().getFirst()));
-                               this.minersThreads.getFirst().start();
-                               break;
+                                this.pruebapanels.getFirst().getMine().getListMiners().add(new Miner(road.getX() + 2, road.getY(), 3));
+                                this.pruebapanels.getFirst().getMine().getListMiners().getFirst().setMovement(true);
+                                this.minersThreads.add(new Thread(this.pruebapanels.getFirst().getMine().getListMiners().getFirst()));
+                                this.minersThreads.getFirst().start();
+                                break;
                             case 3:
-                               this.pruebapanels.getFirst().getMine().getListMiners().add(new Miner(road.getX(), road.getY()+2, 4));
-                               this.pruebapanels.getFirst().getMine().getListMiners().getFirst().setMovement(true);
-                               this.minersThreads.add(new Thread(this.pruebapanels.getFirst().getMine().getListMiners().getFirst()));
-                               this.minersThreads.getFirst().start();
-                               break;
+                                this.pruebapanels.getFirst().getMine().getListMiners().add(new Miner(road.getX(), road.getY() + 2, 4));
+                                this.pruebapanels.getFirst().getMine().getListMiners().getFirst().setMovement(true);
+                                this.minersThreads.add(new Thread(this.pruebapanels.getFirst().getMine().getListMiners().getFirst()));
+                                this.minersThreads.getFirst().start();
+                                break;
                             case 4:
-                               this.pruebapanels.getFirst().getMine().getListMiners().add(new Miner(road.getX()+2, road.getY(), 1));
-                               this.pruebapanels.getFirst().getMine().getListMiners().getFirst().setMovement(true);
-                               this.minersThreads.add(new Thread(this.pruebapanels.getFirst().getMine().getListMiners().getFirst()));
-                               this.minersThreads.getFirst().start();
-                               break;
-                       }
-                    }
+                                this.pruebapanels.getFirst().getMine().getListMiners().add(new Miner(road.getX() + 2, road.getY(), 1));
+                                this.pruebapanels.getFirst().getMine().getListMiners().getFirst().setMovement(true);
+                                this.minersThreads.add(new Thread(this.pruebapanels.getFirst().getMine().getListMiners().getFirst()));
+                                this.minersThreads.getFirst().start();
+                                break;
+                        }
                 }
             }
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-       this.pruebapanels.getFirst().getMine().createGraph();
+        this.pruebapanels.getFirst().getMine().createGraph();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**

@@ -16,6 +16,7 @@ public class TypeMetal extends javax.swing.JDialog
 
     /**
      * Creates new form TypeMetal
+     *
      * @param parent
      * @param modal
      */

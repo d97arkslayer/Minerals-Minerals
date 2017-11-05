@@ -9,29 +9,34 @@ package Models;
  *
  * @author Chinche
  */
-public class GraphNode {
-    
+public class GraphNode
+{
+
     private String name;
 
-    public GraphNode() {
+    public GraphNode()
+    {
     }
 
-    public GraphNode(String name) {
+    public GraphNode(String name)
+    {
         this.name = name;
     }
 
     /**
      * @return the name
      */
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
     /**
      * @param name the Nombre to set
      */
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
-    
+
 }

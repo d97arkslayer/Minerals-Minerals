@@ -11,6 +11,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -56,6 +57,8 @@ public class Minerals_Minerals extends javax.swing.JFrame
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,6 +90,22 @@ public class Minerals_Minerals extends javax.swing.JFrame
             }
         });
         jMenu2.add(jMenuItem3);
+
+        jMenuItem4.setText("Dijkstra");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem4);
+
+        jMenuItem5.setText("Prueba camino");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem5);
 
         jMenuBar1.add(jMenu2);
 
@@ -136,28 +155,28 @@ public class Minerals_Minerals extends javax.swing.JFrame
                         switch (road.getLocationEntry())
                         {
                             case 1:
-                                this.pruebapanels.getFirst().getMine().getListMiners().add(new Miner(road.getX(), road.getY() + 2, 2));
+                                this.pruebapanels.getFirst().getMine().getListMiners().add(new Miner(road.getX(), road.getY() + 2, 2,"Luz"));
                                 this.pruebapanels.getFirst().getMine().getListMiners().getFirst().setMovement(true);
-                                this.minersThreads.add(new Thread(this.pruebapanels.getFirst().getMine().getListMiners().getFirst()));
-                                this.minersThreads.getFirst().start();
+                                this.minersThreads.add(new Thread(this.pruebapanels.getFirst().getMine().getListMiners().getLast()));
+                                this.minersThreads.getLast().start();
                                 break;
                             case 2:
-                                this.pruebapanels.getFirst().getMine().getListMiners().add(new Miner(road.getX() + 2, road.getY(), 3));
+                                this.pruebapanels.getFirst().getMine().getListMiners().add(new Miner(road.getX() + 2, road.getY(), 3,"Luz"));
                                 this.pruebapanels.getFirst().getMine().getListMiners().getFirst().setMovement(true);
-                                this.minersThreads.add(new Thread(this.pruebapanels.getFirst().getMine().getListMiners().getFirst()));
-                                this.minersThreads.getFirst().start();
+                                this.minersThreads.add(new Thread(this.pruebapanels.getFirst().getMine().getListMiners().getLast()));
+                                this.minersThreads.getLast().start();
                                 break;
                             case 3:
-                                this.pruebapanels.getFirst().getMine().getListMiners().add(new Miner(road.getX(), road.getY() + 2, 4));
+                                this.pruebapanels.getFirst().getMine().getListMiners().add(new Miner(road.getX(), road.getY() + 2, 4,"Luz"));
                                 this.pruebapanels.getFirst().getMine().getListMiners().getFirst().setMovement(true);
-                                this.minersThreads.add(new Thread(this.pruebapanels.getFirst().getMine().getListMiners().getFirst()));
-                                this.minersThreads.getFirst().start();
+                                this.minersThreads.add(new Thread(this.pruebapanels.getFirst().getMine().getListMiners().getLast()));
+                                this.minersThreads.getLast().start();
                                 break;
                             case 4:
-                                this.pruebapanels.getFirst().getMine().getListMiners().add(new Miner(road.getX() + 2, road.getY(), 1));
+                                this.pruebapanels.getFirst().getMine().getListMiners().add(new Miner(road.getX() + 2, road.getY(), 1,"Luz"));
                                 this.pruebapanels.getFirst().getMine().getListMiners().getFirst().setMovement(true);
-                                this.minersThreads.add(new Thread(this.pruebapanels.getFirst().getMine().getListMiners().getFirst()));
-                                this.minersThreads.getFirst().start();
+                                this.minersThreads.add(new Thread(this.pruebapanels.getFirst().getMine().getListMiners().getLast()));
+                                this.minersThreads.getLast().start();
                                 break;
                         }
                 }
@@ -168,6 +187,20 @@ public class Minerals_Minerals extends javax.swing.JFrame
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         this.pruebapanels.getFirst().getMine().createGraph();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+         this.pruebapanels.getFirst().getMine().dijkstra();
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        String[] aux=(JOptionPane.showInputDialog("punto")).split(",");
+        Deposit d=(Deposit)this.pruebapanels.getFirst().getMine().getMatrix().get(Integer.parseInt(aux[0])).get(Integer.parseInt(aux[1])).getObject();
+        this.pruebapanels.getFirst().getMine().getListMiners().add(new Miner(d.getX(),d.getY() , 1, "luz"));
+        this.pruebapanels.getFirst().getMine().getListMiners().get(0).setMovement(true);
+        this.pruebapanels.getFirst().getMine().route(JOptionPane.showInputDialog("punto"),0);
+        this.minersThreads.add(new Thread(this.pruebapanels.getFirst().getMine().getListMiners().get(0)));
+        this.minersThreads.getLast().start();
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -225,6 +258,8 @@ public class Minerals_Minerals extends javax.swing.JFrame
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 }

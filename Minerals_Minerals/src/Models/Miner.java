@@ -3,6 +3,7 @@
  */
 package Models;
 
+import java.util.LinkedList;
 import javax.swing.ImageIcon;
 
 /**
@@ -24,12 +25,20 @@ public class Miner implements Runnable
     private ImageIcon image;
     private boolean movement;
     private String previousCollision;
+    private int xBox;
+    private int yBox;
+    private int widthBox;
+    private int heightBox;
+    private ImageIcon imageBox;
+    private String nombre;
+    private boolean followRoute;
+    private LinkedList<String> route;
 
     public Miner()
     {
     }
 
-    public Miner(int x, int y, int direction)
+    public Miner(int x, int y, int direction,String nombre)
     {
         this.x = x;
         this.y = y;
@@ -41,6 +50,14 @@ public class Miner implements Runnable
         this.move = new String[2];
         this.work = new String[3];
         this.previousCollision = "S";
+        this.xBox=this.x+(this.width/2);
+        this.yBox=this.y-40;
+        this.widthBox=50;
+        this.heightBox=40;
+        this.nombre=nombre;
+        this.imageBox=new ImageIcon(getClass().getResource("../Images/miner_box.png"));
+        this.followRoute=false;
+        this.route=new LinkedList<>();
         LoadSprite();
     }
 
@@ -126,15 +143,19 @@ public class Miner implements Runnable
                 {
                     case 1:
                         this.y = this.y - 2;
+                        this.setyBox(this.getyBox() - 2);
                         break;
                     case 2:
                         this.x = this.x + 2;
+                        this.setxBox(this.getxBox() + 2);
                         break;
                     case 3:
                         this.y = this.y + 2;
+                        this.setyBox(this.getyBox() + 2);
                         break;
                     case 4:
                         this.x = this.x - 2;
+                        this.setxBox(this.getxBox() - 2);
                         break;
 
                 }
@@ -342,6 +363,118 @@ public class Miner implements Runnable
     public void setPreviousCollision(String previousCollision)
     {
         this.previousCollision = previousCollision;
+    }
+
+    /**
+     * @return the xBox
+     */
+    public int getxBox() {
+        return xBox;
+    }
+
+    /**
+     * @param xBox the xBox to set
+     */
+    public void setxBox(int xBox) {
+        this.xBox = xBox;
+    }
+
+    /**
+     * @return the yBox
+     */
+    public int getyBox() {
+        return yBox;
+    }
+
+    /**
+     * @param yBox the yBox to set
+     */
+    public void setyBox(int yBox) {
+        this.yBox = yBox;
+    }
+
+    /**
+     * @return the widthBox
+     */
+    public int getWidthBox() {
+        return widthBox;
+    }
+
+    /**
+     * @param widthBox the widthBox to set
+     */
+    public void setWidthBox(int widthBox) {
+        this.widthBox = widthBox;
+    }
+
+    /**
+     * @return the heightBox
+     */
+    public int getHeightBox() {
+        return heightBox;
+    }
+
+    /**
+     * @param heightBox the heightBox to set
+     */
+    public void setHeightBox(int heightBox) {
+        this.heightBox = heightBox;
+    }
+
+    /**
+     * @return the imageBox
+     */
+    public ImageIcon getImageBox() {
+        return imageBox;
+    }
+
+    /**
+     * @param imageBox the imageBox to set
+     */
+    public void setImageBox(ImageIcon imageBox) {
+        this.imageBox = imageBox;
+    }
+
+    /**
+     * @return the nombre
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * @param nombre the nombre to set
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    /**
+     * @return the followRoute
+     */
+    public boolean isFollowRoute() {
+        return followRoute;
+    }
+
+    /**
+     * @param followRoute the followRoute to set
+     */
+    public void setFollowRoute(boolean followRoute) {
+        this.followRoute = followRoute;
+    }
+
+    /**
+     * @return the route
+     */
+    public LinkedList<String> getRoute() {
+        return route;
+    }
+
+    /**
+     * @param route the route to set
+     */
+    public void setRoute(LinkedList<String> route) {
+        this.route = route;
     }
 
 }

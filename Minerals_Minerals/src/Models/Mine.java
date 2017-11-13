@@ -34,7 +34,88 @@ public class Mine
         this.listMiners = new LinkedList<>();
         this.graph = new Graph();
     }
-
+    
+    public void route(String end,int miner)
+    {
+        String start="";
+        for (int i = 0; i < this.matrix.size(); i++) 
+        {
+            for (int j = 0; j < this.matrix.get(i).size(); j++) 
+            {
+                if(this.matrix.get(i).get(j).getObject() instanceof Road)
+                {
+                    Road road=(Road)this.matrix.get(i).get(j).getObject() ;
+                    if(road.isEntry())
+                    {
+                        start=i+","+j;
+                    }
+                }
+            }
+        }
+        LinkedList<String> result=this.graph.getRoute(start, end);
+        this.listMiners.get(miner).setFollowRoute(true);
+        this.listMiners.get(miner).setRoute(result);
+        
+        
+        System.out.println(result);
+        this.listMiners.get(miner).ChangeDirection(newDirection(miner));
+        this.listMiners.get(miner).setState("mover");
+    }
+    
+    public int newDirection(int miner)
+    {
+        int i=0;
+        if(this.listMiners.get(miner).getRoute().size()!=1)
+        {
+            String[] node1=this.listMiners.get(miner).getRoute().get(i).split(",");
+            
+            String[] node2=this.listMiners.get(miner).getRoute().get(i+1).split(",");
+            if(Integer.parseInt(node1[0])>Integer.parseInt(node2[0]) && Integer.parseInt(node1[1])==Integer.parseInt(node2[1]))
+            {
+                this.listMiners.get(miner).getRoute().removeFirst();
+                return 1;
+            }else 
+            if(Integer.parseInt(node1[1])<Integer.parseInt(node2[1]) && Integer.parseInt(node1[0])==Integer.parseInt(node2[0]))
+            {
+               this.listMiners.get(miner).getRoute().removeFirst();
+               return 2;
+            }else
+            if(Integer.parseInt(node1[0])<Integer.parseInt(node2[0]) && Integer.parseInt(node1[1])==Integer.parseInt(node2[1]))
+            {
+                this.listMiners.get(miner).getRoute().removeFirst();
+                return 3;
+            }else
+            if(Integer.parseInt(node1[1])>Integer.parseInt(node2[1]) && Integer.parseInt(node1[0])==Integer.parseInt(node2[0]))
+            {
+               this.listMiners.get(miner).getRoute().removeFirst();
+               return 4;
+            }
+        }else
+        {
+            return 0;
+        }
+        return 0;
+    }
+    
+    public void dijkstra()
+    {
+        String nodeName="";
+        for (int i = 0; i < this.matrix.size(); i++) 
+        {
+            for (int j = 0; j < this.matrix.get(i).size(); j++) 
+            {
+                if(this.matrix.get(i).get(j).getObject() instanceof Road)
+                {
+                    Road r=(Road) this.matrix.get(i).get(j).getObject();
+                    if(r.isEntry())
+                    {
+                        nodeName=i+","+j;
+                    }
+                }
+            }
+        }
+        this.graph.calculateDijkstra(nodeName);
+    }
     public void createGraph()
     {
         LinkedList<String> listNodes = getNameGraphNodes();
@@ -103,7 +184,7 @@ public class Mine
     {
         if (direction == 1)
             if ((j - 1) >= 0)
-                if (this.matrix.get(i).get(j - 1).getObject() instanceof Road)
+                if (this.matrix.get(i).get(j - 1).getObject() instanceof Road || this.matrix.get(i).get(j - 1).getObject() instanceof Deposit)
                     if (name.equalsIgnoreCase(i + "," + (j - 1)))
                         return cont;
                     else
@@ -115,7 +196,7 @@ public class Mine
                     return 0;
         if (direction == 2)
             if ((i - 1) >= 0)
-                if (this.matrix.get(i - 1).get(j).getObject() instanceof Road)
+                if (this.matrix.get(i - 1).get(j).getObject() instanceof Road || this.matrix.get(i - 1).get(j).getObject() instanceof Deposit)
                     if (name.equalsIgnoreCase((i - 1) + "," + j))
                         return cont;
                     else
@@ -127,7 +208,7 @@ public class Mine
                     return 0;
         if (direction == 3)
             if ((j + 1) < this.matrix.get(i).size())
-                if (this.matrix.get(i).get(j + 1).getObject() instanceof Road)
+                if (this.matrix.get(i).get(j + 1).getObject() instanceof Road || this.matrix.get(i).get(j + 1).getObject() instanceof Deposit)
                     if (name.equalsIgnoreCase(i + "," + (j + 1)))
                         return cont;
                     else
@@ -139,7 +220,7 @@ public class Mine
                     return 0;
         if (direction == 4)
             if ((i + 1) < this.matrix.size())
-                if (this.matrix.get(i + 1).get(j).getObject() instanceof Road)
+                if (this.matrix.get(i + 1).get(j).getObject() instanceof Road||this.matrix.get(i + 1).get(j).getObject() instanceof Deposit)
                     if (name.equalsIgnoreCase((i + 1) + "," + j))
                         return cont;
                     else
@@ -156,7 +237,7 @@ public class Mine
     {
         if (direction == 1)
             if ((j - 1) >= 0)
-                if (this.matrix.get(i).get(j - 1).getObject() instanceof Road)
+                if (this.matrix.get(i).get(j - 1).getObject() instanceof Road || this.matrix.get(i).get(j - 1).getObject() instanceof Deposit)
                 {
                     boolean flag = false;
                     for (int k = 0; k < this.graph.getListNodes().size(); k++)
@@ -173,7 +254,7 @@ public class Mine
                     return "";
         if (direction == 2)
             if ((i - 1) >= 0)
-                if (this.matrix.get(i - 1).get(j).getObject() instanceof Road)
+                if (this.matrix.get(i - 1).get(j).getObject() instanceof Road||this.matrix.get(i - 1).get(j).getObject() instanceof Deposit )
                 {
                     boolean flag = false;
                     for (int k = 0; k < this.graph.getListNodes().size(); k++)
@@ -190,7 +271,7 @@ public class Mine
                     return "";
         if (direction == 3)
             if ((j + 1) < this.matrix.get(i).size())
-                if (this.matrix.get(i).get(j + 1).getObject() instanceof Road)
+                if (this.matrix.get(i).get(j + 1).getObject() instanceof Road || this.matrix.get(i).get(j+1).getObject() instanceof Deposit)
                 {
                     boolean flag = false;
                     for (int k = 0; k < this.graph.getListNodes().size(); k++)
@@ -207,7 +288,7 @@ public class Mine
                     return "";
         if (direction == 4)
             if ((i + 1) < this.matrix.size())
-                if (this.matrix.get(i + 1).get(j).getObject() instanceof Road)
+                if (this.matrix.get(i + 1).get(j).getObject() instanceof Road || this.matrix.get(i + 1).get(j).getObject() instanceof Deposit)
                 {
                     boolean flag = false;
                     for (int k = 0; k < this.graph.getListNodes().size(); k++)

@@ -5,6 +5,8 @@
  */
 package Views;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author darkd
@@ -13,6 +15,8 @@ public class TypeMetal extends javax.swing.JDialog
 {
 
     private String metal;
+    private boolean flag;
+    private double amount;
 
     /**
      * Creates new form TypeMetal
@@ -24,8 +28,9 @@ public class TypeMetal extends javax.swing.JDialog
     {
         super(parent, modal);
         this.metal = "";
+        this.amount = 0;
         initComponents();
-        this.setTitle("Metal");
+        this.setTitle("Información");
         this.setLocationRelativeTo(null);
         this.setVisible(true);
 
@@ -41,104 +46,142 @@ public class TypeMetal extends javax.swing.JDialog
     private void initComponents()
     {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        buttonOro = new javax.swing.JButton();
-        buttonPlata = new javax.swing.JButton();
-        buttonCobre = new javax.swing.JButton();
+        buttonOk = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        inputAmount = new javax.swing.JTextPane();
+        labelAmount = new javax.swing.JLabel();
+        rBGold = new javax.swing.JRadioButton();
+        rBSilver = new javax.swing.JRadioButton();
+        rBCopper = new javax.swing.JRadioButton();
+        labelMetal = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        buttonOro.setBackground(new java.awt.Color(204, 204, 204));
-        buttonOro.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        buttonOro.setForeground(new java.awt.Color(0, 0, 0));
-        buttonOro.setText("ORO");
-        buttonOro.addActionListener(new java.awt.event.ActionListener()
+        buttonOk.setBackground(new java.awt.Color(204, 204, 204));
+        buttonOk.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        buttonOk.setText("!OK¡");
+        buttonOk.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                buttonOroActionPerformed(evt);
+                buttonOkActionPerformed(evt);
             }
         });
 
-        buttonPlata.setBackground(new java.awt.Color(204, 204, 204));
-        buttonPlata.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        buttonPlata.setForeground(new java.awt.Color(0, 0, 0));
-        buttonPlata.setText("PLATA");
-        buttonPlata.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                buttonPlataActionPerformed(evt);
-            }
-        });
+        inputAmount.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jScrollPane1.setViewportView(inputAmount);
 
-        buttonCobre.setBackground(new java.awt.Color(204, 204, 204));
-        buttonCobre.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        buttonCobre.setForeground(new java.awt.Color(0, 0, 0));
-        buttonCobre.setText("COBRE");
-        buttonCobre.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                buttonCobreActionPerformed(evt);
-            }
-        });
+        labelAmount.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        labelAmount.setText("Cantidad (Ton)");
+
+        buttonGroup1.add(rBGold);
+        rBGold.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        rBGold.setText("Oro");
+
+        buttonGroup1.add(rBSilver);
+        rBSilver.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        rBSilver.setText("Plata");
+
+        buttonGroup1.add(rBCopper);
+        rBCopper.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        rBCopper.setText("Cobre");
+
+        labelMetal.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        labelMetal.setText("Metal");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(buttonCobre)
-                    .addComponent(buttonPlata, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonOro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(34, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(42, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelAmount)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(rBSilver)
+                                            .addComponent(rBCopper)
+                                            .addComponent(rBGold))
+                                        .addComponent(buttonOk))
+                                    .addGap(12, 12, 12)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(labelMetal)
+                                .addGap(25, 25, 25)))))
+                .addGap(23, 23, 23))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(buttonOro)
+                .addContainerGap()
+                .addComponent(labelAmount)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonPlata)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addComponent(labelMetal)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(rBGold)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonCobre)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addComponent(rBSilver)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rBCopper)
+                .addGap(29, 29, 29)
+                .addComponent(buttonOk)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttonPlataActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_buttonPlataActionPerformed
-    {//GEN-HEADEREND:event_buttonPlataActionPerformed
-        this.metal = "plata";
-        this.setVisible(false);
-    }//GEN-LAST:event_buttonPlataActionPerformed
+    private void buttonOkActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_buttonOkActionPerformed
+    {//GEN-HEADEREND:event_buttonOkActionPerformed
+        if (!(this.inputAmount.getText().equals("")))
+            try
+            {
+                this.amount = Double.parseDouble(this.inputAmount.getText());
+                this.flag = true;
+            }
+            catch (NumberFormatException e)
+            {
+                JOptionPane.showMessageDialog(null, "La cantidad debe ser Numerica y mayor a 0");
+            }
+        else
+            JOptionPane.showMessageDialog(null, "La mina debe tener una cantidad");
 
-    private void buttonOroActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_buttonOroActionPerformed
-    {//GEN-HEADEREND:event_buttonOroActionPerformed
-        this.metal = "oro";
-        this.setVisible(false);
-    }//GEN-LAST:event_buttonOroActionPerformed
-
-    private void buttonCobreActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_buttonCobreActionPerformed
-    {//GEN-HEADEREND:event_buttonCobreActionPerformed
-        this.metal = "cobre";
-        this.setVisible(false);
-    }//GEN-LAST:event_buttonCobreActionPerformed
+        if (rBGold.isSelected())
+            this.metal = "Oro";
+        if (rBSilver.isSelected())
+            this.metal = "Plata";
+        if (rBCopper.isSelected())
+            this.metal = "Cobre";
+        if (flag)
+        {
+            this.setVisible(false);
+            this.dispose();
+        }
+    }//GEN-LAST:event_buttonOkActionPerformed
 
     /**
      * @param args the command line arguments
@@ -199,10 +242,16 @@ public class TypeMetal extends javax.swing.JDialog
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonCobre;
-    private javax.swing.JButton buttonOro;
-    private javax.swing.JButton buttonPlata;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton buttonOk;
+    private javax.swing.JTextPane inputAmount;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelAmount;
+    private javax.swing.JLabel labelMetal;
+    private javax.swing.JRadioButton rBCopper;
+    private javax.swing.JRadioButton rBGold;
+    private javax.swing.JRadioButton rBSilver;
     // End of variables declaration//GEN-END:variables
 
     /**
@@ -219,5 +268,21 @@ public class TypeMetal extends javax.swing.JDialog
     public void setMetal(String metal)
     {
         this.metal = metal;
+    }
+
+    /**
+     * @return the amount
+     */
+    public double getAmount()
+    {
+        return amount;
+    }
+
+    /**
+     * @param amount the amount to set
+     */
+    public void setAmount(double amount)
+    {
+        this.amount = amount;
     }
 }

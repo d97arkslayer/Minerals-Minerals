@@ -17,20 +17,35 @@ public class Deposit
     private int x;
     private int y;
     private int width;
-    private int heigth;
+    private int height;
     private ImageIcon image;
+    private double amount;
 
     public Deposit()
     {
     }
 
-    public Deposit(int x, int y)
+    public Deposit(int x, int y, String i)
     {
         this.x = x;
         this.y = y;
         this.width = 50;
-        this.heigth = 50;
-        this.image = new ImageIcon(getClass().getResource("../Images/rock.png"));
+        this.height = 50;
+        this.amount = 0;
+        switch(i)
+        {
+            case "Oro":
+                this.image = new ImageIcon(getClass().getResource("../Images/gold.gif"));
+                break;
+            case "Plata":
+                this.image = new ImageIcon(getClass().getResource("../Images/silver.gif"));
+                break;
+            case "Cobre":
+                this.image = new ImageIcon(getClass().getResource("../Images/cooper.jpg"));
+                break;
+                    
+        }
+
     }
 
     /**
@@ -82,22 +97,6 @@ public class Deposit
     }
 
     /**
-     * @return the heigth
-     */
-    public int getHeight()
-    {
-        return heigth;
-    }
-
-    /**
-     * @param heigth the heigth to set
-     */
-    public void setHeigth(int heigth)
-    {
-        this.heigth = heigth;
-    }
-
-    /**
      * @return the image
      */
     public ImageIcon getImage()
@@ -111,6 +110,30 @@ public class Deposit
     public void setImage(ImageIcon image)
     {
         this.image = image;
+    }
+
+    /**
+     * @return the heigth
+     */
+    public int getHeight()
+    {
+        return height;
+    }
+
+    /**
+     * @return the amount
+     */
+    public double getAmount()
+    {
+        return amount;
+    }
+
+    /**
+     * @param amount the amount to set
+     */
+    public void setAmount(double amount)
+    {
+        this.amount = amount;
     }
 
 }

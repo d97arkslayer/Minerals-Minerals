@@ -9,10 +9,12 @@ import Models.Deposit;
 import Models.Mine;
 import Models.Road;
 import Models.Wall;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -38,11 +40,11 @@ public class Panel extends javax.swing.JPanel
 
     private void minersFollowRoute()
     {
-        for (int i = 0; i < this.mine.getListMiners().size(); i++) 
+        for (int i = 0; i < this.mine.getListMiners().size(); i++)
         {
-            if(this.mine.getListMiners().get(i).isFollowRoute())
+            if (this.mine.getListMiners().get(i).isFollowRoute())
             {
-               String position=this.mine.getListMiners().get(i).getRoute().getFirst();
+                String position = this.mine.getListMiners().get(i).getRoute().getFirst();
                 for (int j = 0; j < this.mine.getMatrix().size(); j++)
                 {
                     for (int k = 0; k < this.mine.getMatrix().get(j).size(); k++)
@@ -51,84 +53,65 @@ public class Panel extends javax.swing.JPanel
                         {
                             Road road = (Road) this.mine.getMatrix().get(j).get(k).getObject();
                             Rectangle r = new Rectangle((road.getX() + (road.getWidth() / 2)) - 4, (road.getY() + (road.getHeight() / 2)) - 4, 10, 10);
-                            if (this.mine.getListMiners().get(i).getPreviousCollision() == "" || !this.mine.getListMiners().get(i).getPreviousCollision().equalsIgnoreCase(j + "," + k))
+                            if ("".equals(this.mine.getListMiners().get(i).getPreviousCollision()) || !this.mine.getListMiners().get(i).getPreviousCollision().equalsIgnoreCase(j + "," + k))
                                 if (r.intersects(new Rectangle(this.mine.getListMiners().get(i).getX() + (this.mine.getListMiners().get(i).getWidth() / 2), this.mine.getListMiners().get(i).getY() + (this.mine.getListMiners().get(i).getWidth() / 2), 5, 5)) && this.mine.getListMiners().get(i).getDirection() == 2)
                                 {
-                                    if(position.equals(j+","+k))
+                                    if (position.equals(j + "," + k))
                                     {
                                         this.mine.getListMiners().get(i).setPreviousCollision(j + "," + k);
-                                        int direction=this.mine.newDirection(i);
-                                        if(direction!=0)
-                                        {
+                                        int direction = this.mine.newDirection(i);
+                                        if (direction != 0)
                                             this.mine.getListMiners().get(i).ChangeDirection(direction);
-                                        }
                                         else
-                                        {
-                                             this.mine.getListMiners().get(i).setMovement(false);
-                                        }
+                                            this.mine.getListMiners().get(i).setMovement(false);
                                     }
                                 }
                                 else if (r.intersects(new Rectangle(this.mine.getListMiners().get(i).getX() + (this.mine.getListMiners().get(i).getWidth() / 2), this.mine.getListMiners().get(i).getY() + (this.mine.getListMiners().get(i).getWidth() / 2), 5, 5)) && this.mine.getListMiners().get(i).getDirection() == 3)
                                 {
-                                    if(position.equals(j+","+k))
+                                    if (position.equals(j + "," + k))
                                     {
                                         this.mine.getListMiners().get(i).setPreviousCollision(j + "," + k);
-                                        int direction=this.mine.newDirection(i);
-                                        if(direction!=0)
-                                        {
+                                        int direction = this.mine.newDirection(i);
+                                        if (direction != 0)
                                             this.mine.getListMiners().get(i).ChangeDirection(direction);
-                                        }
                                         else
-                                        {
-                                             this.mine.getListMiners().get(i).setMovement(false);
-                                        }
+                                            this.mine.getListMiners().get(i).setMovement(false);
                                     }
                                 }
                                 else if (r.intersects(new Rectangle(this.mine.getListMiners().get(i).getX() + (this.mine.getListMiners().get(i).getWidth() / 2), this.mine.getListMiners().get(i).getY() + (this.mine.getListMiners().get(i).getWidth() / 2), 5, 5)) && this.mine.getListMiners().get(i).getDirection() == 4)
                                 {
-                                    if(position.equals(j+","+k))
+                                    if (position.equals(j + "," + k))
                                     {
                                         this.mine.getListMiners().get(i).setPreviousCollision(j + "," + k);
-                                        int direction=this.mine.newDirection(i);
-                                        if(direction!=0)
-                                        {
+                                        int direction = this.mine.newDirection(i);
+                                        if (direction != 0)
                                             this.mine.getListMiners().get(i).ChangeDirection(direction);
-                                        }
                                         else
-                                        {
-                                             this.mine.getListMiners().get(i).setMovement(false);
-                                        }
+                                            this.mine.getListMiners().get(i).setMovement(false);
                                     }
                                 }
                                 else if (r.intersects(new Rectangle(this.mine.getListMiners().get(i).getX() + (this.mine.getListMiners().get(i).getWidth() / 2), this.mine.getListMiners().get(i).getY() + (this.mine.getListMiners().get(i).getWidth() / 2), 5, 5)) && this.mine.getListMiners().get(i).getDirection() == 1)
-                                {
-                                    if(position.equals(j+","+k))
+                                    if (position.equals(j + "," + k))
                                     {
                                         this.mine.getListMiners().get(i).setPreviousCollision(j + "," + k);
-                                        int direction=this.mine.newDirection(i);
-                                        if(direction!=0)
-                                        {
+                                        int direction = this.mine.newDirection(i);
+                                        if (direction != 0)
                                             this.mine.getListMiners().get(i).ChangeDirection(direction);
-                                        }
                                         else
-                                        {
-                                             this.mine.getListMiners().get(i).setMovement(false);
-                                        }
+                                            this.mine.getListMiners().get(i).setMovement(false);
                                     }
-                                }
                         }
                     }
                 }
             }
         }
     }
-    
+
     private void minersWork()
     {
         for (int i = 0; i < this.mine.getListMiners().size(); i++)
         {
-            if(!this.mine.getListMiners().get(i).isFollowRoute())
-            {
+            if (!this.mine.getListMiners().get(i).isFollowRoute())
                 for (int j = 0; j < this.mine.getMatrix().size(); j++)
                 {
                     for (int k = 0; k < this.mine.getMatrix().get(j).size(); k++)
@@ -148,18 +131,17 @@ public class Panel extends javax.swing.JPanel
                         }
                     }
                 }
-            }
         }
     }
 
     private void minersMovement()
     {
         LinkedList<Integer> roads = new LinkedList<>();
-        LinkedList<Integer> deposit = new LinkedList<>();
+        LinkedList<Integer> deposits = new LinkedList<>();
         boolean flagCollision = false;
         for (int i = 0; i < this.mine.getListMiners().size(); i++)
         {
-            if(!this.mine.getListMiners().get(i).isFollowRoute())
+            if (!this.mine.getListMiners().get(i).isFollowRoute())
             {
                 for (int j = 0; j < this.mine.getMatrix().size(); j++)
                 {
@@ -169,32 +151,32 @@ public class Panel extends javax.swing.JPanel
                         {
                             Road road = (Road) this.mine.getMatrix().get(j).get(k).getObject();
                             Rectangle r = new Rectangle((road.getX() + (road.getWidth() / 2)) - 4, (road.getY() + (road.getHeight() / 2)) - 4, 10, 10);
-                            if (this.mine.getListMiners().get(i).getPreviousCollision() == "" || !this.mine.getListMiners().get(i).getPreviousCollision().equalsIgnoreCase(j + "," + k))
+                            if ("".equals(this.mine.getListMiners().get(i).getPreviousCollision()) || !this.mine.getListMiners().get(i).getPreviousCollision().equalsIgnoreCase(j + "," + k))
                                 if (r.intersects(new Rectangle(this.mine.getListMiners().get(i).getX() + (this.mine.getListMiners().get(i).getWidth() / 2), this.mine.getListMiners().get(i).getY() + (this.mine.getListMiners().get(i).getWidth() / 2), 5, 5)) && this.mine.getListMiners().get(i).getDirection() == 2)
                                 {
                                     roads = roadOptions(j, k, 1);
-                                    deposit = depositOptions(j, k, 1);
+                                    deposits = depositOptions(j, k, 1);
                                     this.mine.getListMiners().get(i).setPreviousCollision(j + "," + k);
                                     flagCollision = true;
                                 }
                                 else if (r.intersects(new Rectangle(this.mine.getListMiners().get(i).getX() + (this.mine.getListMiners().get(i).getWidth() / 2), this.mine.getListMiners().get(i).getY() + (this.mine.getListMiners().get(i).getWidth() / 2), 5, 5)) && this.mine.getListMiners().get(i).getDirection() == 3)
                                 {
                                     roads = roadOptions(j, k, 2);
-                                    deposit = depositOptions(j, k, 2);
+                                    deposits = depositOptions(j, k, 2);
                                     this.mine.getListMiners().get(i).setPreviousCollision(j + "," + k);
                                     flagCollision = true;
                                 }
                                 else if (r.intersects(new Rectangle(this.mine.getListMiners().get(i).getX() + (this.mine.getListMiners().get(i).getWidth() / 2), this.mine.getListMiners().get(i).getY() + (this.mine.getListMiners().get(i).getWidth() / 2), 5, 5)) && this.mine.getListMiners().get(i).getDirection() == 4)
                                 {
                                     roads = roadOptions(j, k, 3);
-                                    deposit = depositOptions(j, k, 3);
+                                    deposits = depositOptions(j, k, 3);
                                     this.mine.getListMiners().get(i).setPreviousCollision(j + "," + k);
                                     flagCollision = true;
                                 }
                                 else if (r.intersects(new Rectangle(this.mine.getListMiners().get(i).getX() + (this.mine.getListMiners().get(i).getWidth() / 2), this.mine.getListMiners().get(i).getY() + (this.mine.getListMiners().get(i).getWidth() / 2), 5, 5)) && this.mine.getListMiners().get(i).getDirection() == 1)
                                 {
                                     roads = roadOptions(j, k, 4);
-                                    deposit = depositOptions(j, k, 4);
+                                    deposits = depositOptions(j, k, 4);
                                     this.mine.getListMiners().get(i).setPreviousCollision(j + "," + k);
                                     flagCollision = true;
                                 }
@@ -202,32 +184,31 @@ public class Panel extends javax.swing.JPanel
                     }
                 }
                 if (flagCollision)
-                if (roads.size() != 0 && deposit.size() == 0)
-                {
-                    int position = (int) (Math.random() * (roads.size())) + 0;
-                    this.mine.getListMiners().get(i).ChangeDirection(roads.get(position));
-                }
-                else if (roads.size() == 0 && deposit.size() != 0)
-                {
-                    int position = (int) (Math.random() * (deposit.size())) + 0;
-                    this.mine.getListMiners().get(i).ChangeDirection(deposit.get(position));
-                }
-                else if (roads.size() != 0 && deposit.size() != 0)
-                {
-                    int select = (int) (Math.random() * (1)) + 0;
-                    if (select == 0)
+                    if (!roads.isEmpty() && deposits.isEmpty())
                     {
                         int position = (int) (Math.random() * (roads.size())) + 0;
                         this.mine.getListMiners().get(i).ChangeDirection(roads.get(position));
                     }
-                    else
+                    else if (roads.isEmpty() && !deposits.isEmpty())
                     {
-                        int position = (int) (Math.random() * (deposit.size())) + 0;
-                        this.mine.getListMiners().get(i).ChangeDirection(deposit.get(position));
+                        int position = (int) (Math.random() * (deposits.size())) + 0;
+                        this.mine.getListMiners().get(i).ChangeDirection(deposits.get(position));
                     }
-                }
-                else
-                    if (this.mine.getListMiners().get(i).getDirection() == 2)
+                    else if (!roads.isEmpty() && !deposits.isEmpty())
+                    {
+                        int select = (int) (Math.random() * (1)) + 0;
+                        if (select == 0)
+                        {
+                            int position = (int) (Math.random() * (roads.size())) + 0;
+                            this.mine.getListMiners().get(i).ChangeDirection(roads.get(position));
+                        }
+                        else
+                        {
+                            int position = (int) (Math.random() * (deposits.size())) + 0;
+                            this.mine.getListMiners().get(i).ChangeDirection(deposits.get(position));
+                        }
+                    }
+                    else if (this.mine.getListMiners().get(i).getDirection() == 2)
                         this.mine.getListMiners().get(i).ChangeDirection(4);
                     else if (this.mine.getListMiners().get(i).getDirection() == 3)
                         this.mine.getListMiners().get(i).ChangeDirection(1);
@@ -351,8 +332,10 @@ public class Panel extends javax.swing.JPanel
             {
                 if (this.mine.getMatrix().get(i).get(j).getObject() instanceof Wall)
                 {
-                    Wall w = (Wall) this.mine.getMatrix().get(i).get(j).getObject();
-                    g.drawImage(w.getImage().getImage(), w.getX(), w.getY(), w.getWidth(), w.getHeight(), this);
+                    Wall p = (Wall) this.mine.getMatrix().get(i).get(j).getObject();
+                    g.setColor(Color.black);
+                    g.fillRect(p.getX(), p.getY(), p.getWidth(), p.getHeight());
+                    //g.drawImage(p.getImage().getImage(), p.getX(), p.getY(), p.getWidth(), p.getHeight(), this);
                 }
                 else if (this.mine.getMatrix().get(i).get(j).getObject() instanceof Road)
                 {
@@ -371,7 +354,7 @@ public class Panel extends javax.swing.JPanel
             for (int i = 0; i < this.mine.getListMiners().size(); i++)
             {
                 g.drawImage(this.mine.getListMiners().get(i).getImageBox().getImage(), this.mine.getListMiners().get(i).getxBox(), this.mine.getListMiners().get(i).getyBox(), this.mine.getListMiners().get(i).getWidthBox(), this.mine.getListMiners().get(i).getHeightBox(), this);
-                 g.drawString(this.mine.getListMiners().get(i).getNombre(), this.mine.getListMiners().get(i).getxBox()+this.mine.getListMiners().get(i).getWidth()/4,this.mine.getListMiners().get(i).getyBox()+20);
+                g.drawString(this.mine.getListMiners().get(i).getNombre(), this.mine.getListMiners().get(i).getxBox() + this.mine.getListMiners().get(i).getWidth() / 4, this.mine.getListMiners().get(i).getyBox() + 20);
                 g.drawImage(this.mine.getListMiners().get(i).getImage().getImage(), this.mine.getListMiners().get(i).getX(), this.mine.getListMiners().get(i).getY(), this.mine.getListMiners().get(i).getWidth(), this.mine.getListMiners().get(i).getHeight(), this);
                 //g.drawRect(this.mine.getListMiners().get(i).getX()+(this.mine.getListMiners().get(i).getWidth()/2), this.mine.getListMiners().get(i).getY()+(this.mine.getListMiners().get(i).getWidth()/2), 5, 5);
             }
@@ -385,9 +368,17 @@ public class Panel extends javax.swing.JPanel
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
-        setBackground(new java.awt.Color(51, 51, 0));
+        setBackground(new java.awt.Color(0, 0, 0));
+        addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                formMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -400,6 +391,23 @@ public class Panel extends javax.swing.JPanel
             .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_formMouseClicked
+    {//GEN-HEADEREND:event_formMouseClicked
+        for (int i = 0; i < this.mine.getMatrix().size(); i++)
+        {
+            for (int j = 0; j < this.mine.getMatrix().get(i).size(); j++)
+            {
+                if (this.mine.getMatrix().get(i).get(j).getObject() instanceof Deposit)
+                {
+                    Deposit d = (Deposit) this.mine.getMatrix().get(i).get(j).getObject();
+                    Rectangle r = new Rectangle(d.getX(), d.getY(), d.getWidth(), d.getHeight());
+                    if (r.intersects(new Rectangle(evt.getX(), evt.getY(), 1, 1)))
+                        JOptionPane.showMessageDialog(null, d.getAmount() + "\n");
+                }
+            }
+        }
+    }//GEN-LAST:event_formMouseClicked
 
     /**
      * @return the mine

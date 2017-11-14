@@ -44,7 +44,7 @@ public class Builder extends java.awt.Dialog
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setSize((int) (screenSize.getWidth()) - 80, (int) (screenSize.getHeight()) - 80);
-        this.setResizable(false);
+        //this.setResizable(false);
 
     }
 
@@ -283,8 +283,8 @@ public class Builder extends java.awt.Dialog
      * Closes the dialog
      */
     private void closeDialog(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closeDialog
-        setVisible(false);
-        dispose();
+        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_closeDialog
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton6ActionPerformed
@@ -312,8 +312,9 @@ public class Builder extends java.awt.Dialog
                     this.giveImage(i, j, this.mine.getMatrix().size(), this.mine.getMatrix().get(i).size());
             }
         }
-        setVisible(false);
-        dispose();
+        this.amountOfEveryDeposit();
+        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnAddWidthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddWidthActionPerformed
@@ -446,8 +447,9 @@ public class Builder extends java.awt.Dialog
                         Rectangle r = new Rectangle(ro.getX(), ro.getY(), ro.getWidth(), ro.getHeight());
                         if (r.intersects(new Rectangle(evt.getX(), evt.getY(), 1, 1)))
                         {
-                            Deposit deposit = new Deposit(ro.getX(), ro.getY());
+                            Deposit deposit = new Deposit(ro.getX(), ro.getY(), this.mine.getMetal());
                             this.mine.getMatrix().get(i).get(j).setObject(deposit);
+                            this.mine.setAmountOfDeposits(this.mine.getAmountOfDeposits() + 1);
                         }
                     }
                     else if (this.mine.getMatrix().get(i).get(j).getObject() instanceof Deposit)
@@ -458,6 +460,7 @@ public class Builder extends java.awt.Dialog
                         {
                             Wall wall = new Wall(d.getX(), d.getY());
                             this.mine.getMatrix().get(i).get(j).setObject(wall);
+                            this.mine.setAmountOfDeposits(this.mine.getAmountOfDeposits() - 1);
                         }
                     }
                 }
@@ -543,6 +546,18 @@ public class Builder extends java.awt.Dialog
             r.setImage(r.getImages()[10]);
         }
 
+    }
+
+    public void amountOfEveryDeposit()
+    {
+        double amount = this.mine.getAmount() / this.mine.getAmountOfDeposits();
+        this.mine.getMatrix().forEach((matrix) ->
+        {
+            matrix.stream().filter((section) -> (section.getObject() instanceof Deposit)).map((section) -> (Deposit) section.getObject()).forEachOrdered((d) ->
+            {
+                d.setAmount(amount);
+            });
+        });
     }
     /**
      * @param args the command line arguments

@@ -124,10 +124,14 @@ public class Mine
         }
         for (int i = 0; i < this.graph.getListNodes().size(); i++)
         {
-            LinkedHashMap<String, Integer> edges = getAdjacentNodes(this.graph.getListNodes().get(i).getName());
-            for (String name : edges.keySet())
+            String aux[]=this.graph.getListNodes().get(i).getName().split(",");
+            if(this.matrix.get(Integer.parseInt(aux[0])).get(Integer.parseInt(aux[1])).getObject() instanceof  Road)
             {
-                this.graph.getListEdges().get(i).add(new GraphEdge(new GraphNode(name), edges.get(name)));
+                LinkedHashMap<String, Integer> edges = getAdjacentNodes(this.graph.getListNodes().get(i).getName());
+                for (String name : edges.keySet())
+                {
+                    this.graph.getListEdges().get(i).add(new GraphEdge(new GraphNode(name), edges.get(name)));
+                }
             }
         }
         printGraph();

@@ -33,6 +33,7 @@ public class Miner implements Runnable
     private String nombre;
     private boolean followRoute;
     private LinkedList<String> route;
+    private String especiality;
 
     public Miner()
     {
@@ -103,7 +104,7 @@ public class Miner implements Runnable
         }
     }
 
-    public void ChangeDirection(int newDirection)
+    public void changeDirection(int newDirection)
     {
         this.direction = newDirection;
         loadSprite();
@@ -491,6 +492,22 @@ public class Miner implements Runnable
     public void setRoute(LinkedList<String> route)
     {
         this.route = route;
+    }
+
+    /**
+     * @return the especiality
+     */
+    public String getEspeciality()
+    {
+        return especiality;
+    }
+
+    /**
+     * @param especiality the especiality to set
+     */
+    public void setEspeciality(String especiality)
+    {
+        this.especiality = especiality;
     }
 
 }

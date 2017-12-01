@@ -61,7 +61,7 @@ public class Panel extends javax.swing.JPanel
                                         this.mine.getListMiners().get(i).setPreviousCollision(j + "," + k);
                                         int direction = this.mine.newDirection(i);
                                         if (direction != 0)
-                                            this.mine.getListMiners().get(i).ChangeDirection(direction);
+                                            this.mine.getListMiners().get(i).changeDirection(direction);
                                         else
                                             this.mine.getListMiners().get(i).setMovement(false);
                                     }
@@ -73,7 +73,7 @@ public class Panel extends javax.swing.JPanel
                                         this.mine.getListMiners().get(i).setPreviousCollision(j + "," + k);
                                         int direction = this.mine.newDirection(i);
                                         if (direction != 0)
-                                            this.mine.getListMiners().get(i).ChangeDirection(direction);
+                                            this.mine.getListMiners().get(i).changeDirection(direction);
                                         else
                                             this.mine.getListMiners().get(i).setMovement(false);
                                     }
@@ -85,7 +85,7 @@ public class Panel extends javax.swing.JPanel
                                         this.mine.getListMiners().get(i).setPreviousCollision(j + "," + k);
                                         int direction = this.mine.newDirection(i);
                                         if (direction != 0)
-                                            this.mine.getListMiners().get(i).ChangeDirection(direction);
+                                            this.mine.getListMiners().get(i).changeDirection(direction);
                                         else
                                             this.mine.getListMiners().get(i).setMovement(false);
                                     }
@@ -96,7 +96,7 @@ public class Panel extends javax.swing.JPanel
                                         this.mine.getListMiners().get(i).setPreviousCollision(j + "," + k);
                                         int direction = this.mine.newDirection(i);
                                         if (direction != 0)
-                                            this.mine.getListMiners().get(i).ChangeDirection(direction);
+                                            this.mine.getListMiners().get(i).changeDirection(direction);
                                         else
                                             this.mine.getListMiners().get(i).setMovement(false);
                                     }
@@ -187,12 +187,12 @@ public class Panel extends javax.swing.JPanel
                     if (!roads.isEmpty() && deposits.isEmpty())
                     {
                         int position = (int) (Math.random() * (roads.size())) + 0;
-                        this.mine.getListMiners().get(i).ChangeDirection(roads.get(position));
+                        this.mine.getListMiners().get(i).changeDirection(roads.get(position));
                     }
                     else if (roads.isEmpty() && !deposits.isEmpty())
                     {
                         int position = (int) (Math.random() * (deposits.size())) + 0;
-                        this.mine.getListMiners().get(i).ChangeDirection(deposits.get(position));
+                        this.mine.getListMiners().get(i).changeDirection(deposits.get(position));
                     }
                     else if (!roads.isEmpty() && !deposits.isEmpty())
                     {
@@ -200,22 +200,22 @@ public class Panel extends javax.swing.JPanel
                         if (select == 0)
                         {
                             int position = (int) (Math.random() * (roads.size())) + 0;
-                            this.mine.getListMiners().get(i).ChangeDirection(roads.get(position));
+                            this.mine.getListMiners().get(i).changeDirection(roads.get(position));
                         }
                         else
                         {
                             int position = (int) (Math.random() * (deposits.size())) + 0;
-                            this.mine.getListMiners().get(i).ChangeDirection(deposits.get(position));
+                            this.mine.getListMiners().get(i).changeDirection(deposits.get(position));
                         }
                     }
                     else if (this.mine.getListMiners().get(i).getDirection() == 2)
-                        this.mine.getListMiners().get(i).ChangeDirection(4);
+                        this.mine.getListMiners().get(i).changeDirection(4);
                     else if (this.mine.getListMiners().get(i).getDirection() == 3)
-                        this.mine.getListMiners().get(i).ChangeDirection(1);
+                        this.mine.getListMiners().get(i).changeDirection(1);
                     else if (this.mine.getListMiners().get(i).getDirection() == 1)
-                        this.mine.getListMiners().get(i).ChangeDirection(3);
+                        this.mine.getListMiners().get(i).changeDirection(3);
                     else if (this.mine.getListMiners().get(i).getDirection() == 4)
-                        this.mine.getListMiners().get(i).ChangeDirection(2);
+                        this.mine.getListMiners().get(i).changeDirection(2);
             }
         }
     }

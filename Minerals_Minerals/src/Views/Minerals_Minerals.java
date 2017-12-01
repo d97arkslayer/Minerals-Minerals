@@ -6,11 +6,24 @@
 package Views;
 
 import Models.*;
+import Models.JSON.InformationMineJson;
+import Models.JSON.JsonLoadProcess;
+import Models.JSON.JsonModel;
+import Models.JSON.JsonSaveProcess;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FileDialog;
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -23,6 +36,7 @@ public class Minerals_Minerals extends javax.swing.JFrame
 
     int countMines = 1;
     LinkedList<JPanel> panels = new LinkedList<>();
+    InformationMineJson generalInformation = new InformationMineJson();
     LinkedList<Panel> pruebapanels = new LinkedList<>();
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     LinkedList<Thread> minersThreads = new LinkedList<>();
@@ -48,11 +62,14 @@ public class Minerals_Minerals extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        btnJson = new javax.swing.JMenuItem();
+        btnLoad = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -63,45 +80,76 @@ public class Minerals_Minerals extends javax.swing.JFrame
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jMenu1.setText("File");
+
+        btnJson.setText("Guardar");
+        btnJson.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnJsonActionPerformed(evt);
+            }
+        });
+        jMenu1.add(btnJson);
+
+        btnLoad.setText("Cargar");
+        btnLoad.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnLoadActionPerformed(evt);
+            }
+        });
+        jMenu1.add(btnLoad);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Acciones");
 
         jMenuItem1.setText("Agregar Mina");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jMenuItem1ActionPerformed(evt);
             }
         });
         jMenu2.add(jMenuItem1);
 
         jMenuItem2.setText("Prueba Minero");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jMenuItem2ActionPerformed(evt);
             }
         });
         jMenu2.add(jMenuItem2);
 
         jMenuItem3.setText("Grafo");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jMenuItem3ActionPerformed(evt);
             }
         });
         jMenu2.add(jMenuItem3);
 
         jMenuItem4.setText("Dijkstra");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jMenuItem4ActionPerformed(evt);
             }
         });
         jMenu2.add(jMenuItem4);
 
         jMenuItem5.setText("Prueba camino");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jMenuItem5ActionPerformed(evt);
             }
         });
@@ -203,6 +251,92 @@ public class Minerals_Minerals extends javax.swing.JFrame
         this.minersThreads.getLast().start();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
+    private void btnJsonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnJsonActionPerformed
+    {//GEN-HEADEREND:event_btnJsonActionPerformed
+
+        LinkedList<Mine> mines = new LinkedList<>();
+        this.pruebapanels.forEach((panel) ->
+        {
+            mines.add(panel.getMine());
+        });
+        JsonSaveProcess save = new JsonSaveProcess(mines, generalInformation);
+        FileWriter fw = null;
+        try
+        {
+            FileDialog fd = new FileDialog(this, "Guardar", FileDialog.SAVE);
+            fd.setFile("*.json");
+            fd.setVisible(true);
+            if (fd.getDirectory() != null && fd.getFile() != null)
+            {
+                String src = fd.getDirectory() + fd.getFile();
+                fw = new FileWriter(src, true);
+                //System.out.println(this.game.save());
+                fw.append(save.save());
+                fw.close();
+            }
+        }
+        catch (IOException e)
+        {
+            Logger.getLogger(Minerals_Minerals.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+    }//GEN-LAST:event_btnJsonActionPerformed
+
+    private void btnLoadActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnLoadActionPerformed
+    {//GEN-HEADEREND:event_btnLoadActionPerformed
+        String chain = "";
+        try
+        {
+            JsonModel aux;
+            FileDialog fd = new FileDialog(this, "Select file", FileDialog.LOAD);
+            fd.setVisible(true);
+            String src = fd.getDirectory() + fd.getFile();
+            BufferedReader br;
+
+            br = new BufferedReader(new FileReader(new File(src)));
+            String s;
+            try
+            {
+                while ((s = br.readLine()) != null)
+                {
+                    chain += s;
+                }
+
+            }
+            catch (IOException ex)
+            {
+                Logger.getLogger(Minerals_Minerals.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            br.close();
+        }
+        catch (FileNotFoundException ex)
+        {
+            Logger.getLogger(Minerals_Minerals.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        catch (IOException ex)
+        {
+            Logger.getLogger(Minerals_Minerals.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JsonLoadProcess load = new JsonLoadProcess(chain);
+        this.generalInformation = load.getInformationGeneralOfMine();
+        LinkedList<Mine> ms = load.getMines();
+        for (Mine m : ms)
+        {
+
+            JPanel jp = new JPanel();
+            jp.setBackground(Color.BLUE);
+            Panel pAux = new Panel((int) (this.screenSize.getWidth()), (int) (this.screenSize.height));
+            jp.removeAll();
+            ((FlowLayout) jp.getLayout()).setAlignment(FlowLayout.LEADING);
+            pAux.setMine(m);
+            this.pruebapanels.add(pAux);
+            jp.add(pAux);
+            this.panels.add(jp);
+            this.jTabbedPane1.add("Mina " + this.countMines, this.panels.getLast());
+            this.countMines++;
+        }
+    }//GEN-LAST:event_btnLoadActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -245,6 +379,7 @@ public class Minerals_Minerals extends javax.swing.JFrame
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable()
         {
+            @Override
             public void run()
             {
                 new Minerals_Minerals().setVisible(true);
@@ -253,6 +388,8 @@ public class Minerals_Minerals extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem btnJson;
+    private javax.swing.JMenuItem btnLoad;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;

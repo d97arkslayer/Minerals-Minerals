@@ -21,7 +21,15 @@ public class Mine
     private LinkedList<LinkedList<SectionMap>> matrix;
     private LinkedList<Miner> listMiners;
     private Graph graph;
-    private int AmountOfDeposits;
+    private int amountOfDeposits;
+    private int maxMiners;
+    private double produceMineral;
+    private double timeToExtract;
+    private String unitTimeToExtract;
+    private double speed;
+    private String unitSpeed;
+    private double amountForDeposit;
+    private String unitAmount;
 
     public Mine()
     {
@@ -35,7 +43,7 @@ public class Mine
         this.metal = metal;
         this.matrix = new LinkedList<>();
         this.listMiners = new LinkedList<>();
-        this.AmountOfDeposits = 0;
+        this.amountOfDeposits = 0;
         this.graph = new Graph();
     }
 
@@ -59,7 +67,7 @@ public class Mine
         this.listMiners.get(miner).setRoute(result);
 
         System.out.println(result);
-        this.listMiners.get(miner).ChangeDirection(newDirection(miner));
+        this.listMiners.get(miner).changeDirection(newDirection(miner));
         this.listMiners.get(miner).setState("mover");
     }
 
@@ -118,10 +126,10 @@ public class Mine
     public void createGraph()
     {
         LinkedList<String> listNodes = getNameGraphNodes();
-        for (String name : listNodes)
+        listNodes.forEach((name) ->
         {
             this.graph.addNode(name);
-        }
+        });
         for (int i = 0; i < this.graph.getListNodes().size(); i++)
         {
             LinkedHashMap<String, Integer> edges = getAdjacentNodes(this.graph.getListNodes().get(i).getName());
@@ -548,19 +556,147 @@ public class Mine
     }
 
     /**
-     * @return the AmountOfDeposits
+     * @return the amountOfDeposits
      */
     public int getAmountOfDeposits()
     {
-        return AmountOfDeposits;
+        return amountOfDeposits;
     }
 
     /**
-     * @param AmountOfDeposits the AmountOfDeposits to set
+     * @param amountOfDeposits the amountOfDeposits to set
      */
-    public void setAmountOfDeposits(int AmountOfDeposits)
+    public void setAmountOfDeposits(int amountOfDeposits)
     {
-        this.AmountOfDeposits = AmountOfDeposits;
+        this.amountOfDeposits = amountOfDeposits;
+    }
+
+    /**
+     * @return the maxMiners
+     */
+    public int getMaxMiners()
+    {
+        return maxMiners;
+    }
+
+    /**
+     * @param maxMiners the maxMiners to set
+     */
+    public void setMaxMiners(int maxMiners)
+    {
+        this.maxMiners = maxMiners;
+    }
+
+    /**
+     * @return the produceMineral
+     */
+    public double getProduceMineral()
+    {
+        return produceMineral;
+    }
+
+    /**
+     * @param produceMineral the produceMineral to set
+     */
+    public void setProduceMineral(double produceMineral)
+    {
+        this.produceMineral = produceMineral;
+    }
+
+    /**
+     * @return the timeToExtract
+     */
+    public double getTimeToExtract()
+    {
+        return timeToExtract;
+    }
+
+    /**
+     * @param timeToExtract the timeToExtract to set
+     */
+    public void setTimeToExtract(double timeToExtract)
+    {
+        this.timeToExtract = timeToExtract;
+    }
+
+    /**
+     * @return the unitTimeToExtract
+     */
+    public String getUnitTimeToExtract()
+    {
+        return unitTimeToExtract;
+    }
+
+    /**
+     * @param unitTimeToExtract the unitTimeToExtract to set
+     */
+    public void setUnitTimeToExtract(String unitTimeToExtract)
+    {
+        this.unitTimeToExtract = unitTimeToExtract;
+    }
+
+    /**
+     * @return the speed
+     */
+    public double getSpeed()
+    {
+        return speed;
+    }
+
+    /**
+     * @param speed the speed to set
+     */
+    public void setSpeed(double speed)
+    {
+        this.speed = speed;
+    }
+
+    /**
+     * @return the unitSpeed
+     */
+    public String getUnitSpeed()
+    {
+        return unitSpeed;
+    }
+
+    /**
+     * @param unitSpeed the unitSpeed to set
+     */
+    public void setUnitSpeed(String unitSpeed)
+    {
+        this.unitSpeed = unitSpeed;
+    }
+
+    /**
+     * @return the amountForDeposit
+     */
+    public double getAmountForDeposit()
+    {
+        return amountForDeposit;
+    }
+
+    /**
+     * @param amountForDeposit the amountForDeposit to set
+     */
+    public void setAmountForDeposit(double amountForDeposit)
+    {
+        this.amountForDeposit = amountForDeposit;
+    }
+
+    /**
+     * @return the unitAmount
+     */
+    public String getUnitAmount()
+    {
+        return unitAmount;
+    }
+
+    /**
+     * @param unitAmount the unitAmount to set
+     */
+    public void setUnitAmount(String unitAmount)
+    {
+        this.unitAmount = unitAmount;
     }
 
     /**

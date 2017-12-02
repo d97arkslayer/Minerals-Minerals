@@ -126,7 +126,20 @@ public class JsonLoadProcess
 
             Road r = (Road) aux.getMatrix().get(mine.getEntradaMina().getY()).get(mine.getEntradaMina().getX()).getObject();
             r.setEntry(true);
-            r.setLocationEntry(1);
+            if(mine.getEntradaMina().getX()==0)
+            {
+                r.setLocationEntry(1);
+            }
+            else if(mine.getEntradaMina().getY()==0){
+                r.setLocationEntry(2);
+            }
+            else if(aux.getMatrix().size()-1==mine.getEntradaMina().getY()){
+                r.setLocationEntry(4);
+            }
+            else{
+                r.setLocationEntry(3);
+            }
+            
             aux.getMatrix().get(mine.getEntradaMina().getY()).get(mine.getEntradaMina().getX()).setObject(r);
             aux.setAmount(amount * aux.getAmountForDeposit());
             aux.setAmountOfDeposits(amount);

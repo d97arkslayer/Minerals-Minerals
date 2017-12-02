@@ -38,8 +38,17 @@ public class Road
         this.entry = entry;
         this.locationEntry = locationEntry;
         this.image = new ImageIcon(getClass().getResource("../Images/road.png"));
-        if (this.entry)
-            switch (this.locationEntry)
+        if (this.entry){
+            locateEntry();
+        }
+            
+//        else
+//            this.image = new ImageIcon(getClass().getResource("../Images/road.png"));
+    }
+    
+    public void locateEntry()
+    {
+        switch (this.locationEntry)
             {
                 case 1:
                     this.image = new ImageIcon(getClass().getResource("../Images/left_entry.png"));
@@ -54,10 +63,8 @@ public class Road
                     this.image = new ImageIcon(getClass().getResource("../Images/down_entry.png"));
                     break;
             }
-//        else
-//            this.image = new ImageIcon(getClass().getResource("../Images/road.png"));
     }
-
+    
     public void myRoadImages()
     {
         this.setImages(new ImageIcon[11]);
@@ -184,6 +191,7 @@ public class Road
     public void setLocationEntry(int locationEntry)
     {
         this.locationEntry = locationEntry;
+        locateEntry();
     }
 
     /**

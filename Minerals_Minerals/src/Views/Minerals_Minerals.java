@@ -35,6 +35,7 @@ public class Minerals_Minerals extends javax.swing.JFrame
 {
 
     int countMines = 1;
+    LinkedList<Integer> totalGain=new LinkedList<>();
     LinkedList<JPanel> panels = new LinkedList<>();
     InformationMineJson generalInformation = new InformationMineJson();
     LinkedList<Panel> pruebapanels = new LinkedList<>();
@@ -54,7 +55,247 @@ public class Minerals_Minerals extends javax.swing.JFrame
         this.setTitle("Minerals & Minerals");
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("../Images/miner_logo.png")));
     }
-
+    
+    
+    public void locateMiners(LinkedList<Mine> listMines,int miners)
+    {
+        int[] minersByMine=new int[listMines.size()];
+        int amountMiners=miners;
+        while(amountMiners>0)
+        {
+            int[][] matriz=new int[amountMiners][listMines.size()];
+            int[][] matriz1=new int[amountMiners][listMines.size()];
+            for (int i = 0; i < matriz.length; i++) 
+            {
+              for (int j = 0; j < matriz[i].length; j++) 
+              {
+                if(minersByMine[j]==0)
+                {
+                    if(i==0)
+                    {
+                        if((i+1)<listMines.get(j).getAmountOfDeposits())
+                        {
+                            matriz[i][j]=(i+1)*800;
+                            matriz1[i][j]=1;
+                        }
+                        else if((i+1)==listMines.get(j).getAmountOfDeposits())
+                        {
+                            matriz[i][j]=(i+1)*950;
+                            matriz1[i][j]=1;
+                        }
+                        else
+                        {
+                            int aux;
+                            if((listMines.get(j).getAmountOfDeposits()-
+                                ((i+1+minersByMine[j])))<0)
+                            {
+                                aux=(listMines.get(j).getAmountOfDeposits()-
+                                    ((i+1+minersByMine[j])))*(-1);
+                            }else
+                            {
+                                aux=(listMines.get(j).getAmountOfDeposits()-
+                                    ((i+1+minersByMine[j])));
+                            }
+                            matriz[i][j]=(listMines.get(j).getAmountOfDeposits())
+                                *250-((aux)*120);
+                            matriz1[i][j]=1;
+                        }
+                    }
+                    else
+                    {
+                        int total;
+                        if((i+1)<listMines.get(j).getAmountOfDeposits())
+                        {
+                            total=(i+1)*800;
+                        }
+                        else if((i+1)==listMines.get(j).getAmountOfDeposits())
+                        {
+                            total=(i+1)*950;
+                        }
+                        else
+                        {
+                            int aux;
+                            if((listMines.get(j).getAmountOfDeposits()-
+                               ((i+1+minersByMine[j])))<0)
+                            {
+                                aux=(listMines.get(j).getAmountOfDeposits()-
+                                    ((i+1+minersByMine[j])))*(-1);
+                            }else
+                            {
+                                aux=(listMines.get(j).getAmountOfDeposits()-
+                                    ((i+1+minersByMine[j])));
+                            }
+                            total=(listMines.get(j).getAmountOfDeposits())*250-((aux)*120);
+                        }
+                        if(total>matriz[i-1][j]){
+                            matriz[i][j]=total;
+                            matriz1[i][j]=1;
+                        }else
+                        {
+                            matriz[i][j]=matriz[i-1][j];
+                        }
+                    }
+                    
+                }
+                else
+                {
+                    if(i==0)
+                    {
+                        if(((i+1+minersByMine[j]))<listMines.get(j).getAmountOfDeposits())
+                        {
+                            matriz[i][j]=((i+1+minersByMine[j]))*800;
+                            matriz1[i][j]=1;
+                        }
+                        else if(((i+1+minersByMine[j]))==listMines.get(j).getAmountOfDeposits())
+                        {
+                            matriz[i][j]=((i+1+minersByMine[j]))*950;
+                            matriz1[i][j]=1;
+                        }
+                        else
+                        {
+                            int aux;
+                            if((listMines.get(j).getAmountOfDeposits()-
+                                ((i+1+minersByMine[j])))<0)
+                            {
+                                aux=(listMines.get(j).getAmountOfDeposits()-
+                                    ((i+1+minersByMine[j])))*(-1);
+                            }else
+                            {
+                                aux=(listMines.get(j).getAmountOfDeposits()-
+                                   ((i+1+minersByMine[j])));
+                            }
+                            matriz[i][j]=(listMines.get(j).getAmountOfDeposits())
+                                *250-(aux*120);
+                            matriz1[i][j]=1;
+                        }
+                    }
+                    else
+                    {
+                        int total;
+                        if(((i+1+minersByMine[j]))<listMines.get(j).getAmountOfDeposits())
+                        {
+                            total=((i+1+minersByMine[j]))*800;
+                        }
+                        else if(((i+1+minersByMine[j]))==listMines.get(j).getAmountOfDeposits())
+                        {
+                            total=((i+1+minersByMine[j]))*950;
+                        }
+                        else
+                        {
+                            int aux;
+                            if((listMines.get(j).getAmountOfDeposits()-
+                                ((i+1+minersByMine[j])))<0)
+                            {
+                                aux=(listMines.get(j).getAmountOfDeposits()-
+                                   ((i+1+minersByMine[j])))*(-1);
+                            }else
+                            {
+                                aux=(listMines.get(j).getAmountOfDeposits()-
+                                    ((i+1+minersByMine[j])));
+                            }
+                            total=(listMines.get(j).getAmountOfDeposits())*250-((aux)*120);
+                        }
+                        if(total>matriz[i-1][j]){
+                            matriz[i][j]=total;
+                            matriz1[i][j]=1;
+                        }else
+                        {
+                            matriz[i][j]=matriz[i-1][j];
+                        }   
+                    }
+                }
+            }
+        }
+            String res="";
+            String res1="";
+            for (int i = 0; i < matriz.length; i++) {
+                for (int j = 0; j < matriz[i].length; j++) {
+                    res=res+"|"+matriz[i][j]+"|";
+                    res1=res1+"|"+matriz1[i][j]+"|";
+                }
+                res=res+"\n";
+                res1=res1+"\n";
+            }
+            System.out.println(res);
+            System.out.println(res1);
+        int higher=0;
+        int position=0;
+        //int counthigher=0;
+        LinkedList<Integer> positions=new LinkedList<>();
+        for (int i = 0; i < matriz[matriz.length-1].length; i++) 
+        {
+           if(matriz[matriz.length-1][i]>higher)
+            {
+                position=i;
+                higher=matriz[matriz.length-1][i];
+                //positions.add(i);
+                //counthigher=1;
+            }
+           else if(matriz[matriz.length-1][i]==higher)
+           {
+               positions.add(i);
+           }
+        }
+        if(positions.isEmpty())
+        {
+            for (int i = 0; i < matriz1.length; i++) 
+            {
+               if(matriz1[i][position]==1)
+               {
+                    amountMiners--;
+                    minersByMine[position]=minersByMine[position]+1;
+               }
+            }
+        }else
+        {
+            position=betterOption(positions);
+            for (int i = 0; i < matriz1.length; i++) 
+            {
+               if(matriz1[i][position]==1)
+               {
+                    amountMiners--;
+                    minersByMine[position]=minersByMine[position]+1;
+               }
+            }
+        }
+    }
+        for (int i = 0; i < minersByMine.length; i++) 
+        {
+            listMines.get(i).setAsignedminers(minersByMine[i]);
+            System.out.println(minersByMine[i]);
+        }
+        
+}
+    
+    public int betterOption(LinkedList<Integer> options)
+    {
+        int option = 0;
+        double value=0;
+        
+        for (int i = 0; i < options.size(); i++) 
+        {
+            if(i==0)
+            {
+                value=(this.pruebapanels.get(options.get(i)).getMine().getAmountForDeposit()*
+                       this.pruebapanels.get(options.get(i)).getMine().getTimeToExtract())/
+                       this.pruebapanels.get(options.get(i)).getMine().getProduceMineral();
+                option=i;
+            }else
+            {
+                double auxValue=(this.pruebapanels.get(options.get(i)).getMine().getAmountForDeposit()*
+                       this.pruebapanels.get(options.get(i)).getMine().getTimeToExtract())/
+                       this.pruebapanels.get(options.get(i)).getMine().getProduceMineral();
+                
+                if(auxValue<value)
+                {
+                    value=auxValue;
+                    option=i;
+                }
+            }
+        }
+        return option;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -62,8 +303,7 @@ public class Minerals_Minerals extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -76,26 +316,25 @@ public class Minerals_Minerals extends javax.swing.JFrame
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jMenu1.setText("File");
 
         btnJson.setText("Guardar");
-        btnJson.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnJson.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnJsonActionPerformed(evt);
             }
         });
         jMenu1.add(btnJson);
 
         btnLoad.setText("Cargar");
-        btnLoad.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnLoad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoadActionPerformed(evt);
             }
         });
@@ -106,54 +345,68 @@ public class Minerals_Minerals extends javax.swing.JFrame
         jMenu2.setText("Acciones");
 
         jMenuItem1.setText("Agregar Mina");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
             }
         });
         jMenu2.add(jMenuItem1);
 
         jMenuItem2.setText("Prueba Minero");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
             }
         });
         jMenu2.add(jMenuItem2);
 
         jMenuItem3.setText("Grafo");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
             }
         });
         jMenu2.add(jMenuItem3);
 
         jMenuItem4.setText("Dijkstra");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem4ActionPerformed(evt);
             }
         });
         jMenu2.add(jMenuItem4);
 
         jMenuItem5.setText("Prueba camino");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem5ActionPerformed(evt);
             }
         });
         jMenu2.add(jMenuItem5);
+
+        jMenuItem6.setText("Ubicar mineros");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem6);
+
+        jMenuItem7.setText("jMenuItem7");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem7);
+
+        jMenuItem8.setText("jMenuItem8");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem8);
 
         jMenuBar1.add(jMenu2);
 
@@ -337,6 +590,56 @@ public class Minerals_Minerals extends javax.swing.JFrame
         }
     }//GEN-LAST:event_btnLoadActionPerformed
 
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        int count=1;
+        while(count<=3)
+        {   
+            LinkedList<Mine> listMines=new LinkedList<>();
+            for(Panel panel:this.pruebapanels)
+            {
+                if(count==1 && panel.getMine().getMetal().equalsIgnoreCase("oro"))
+                {
+                    listMines.add(panel.getMine());
+                }
+            }
+            if (!listMines.isEmpty())
+            {
+                this.locateMiners(listMines, 13);
+                count++;
+            }
+            else
+            {
+                count++;
+            }
+        }
+        int total=0;
+        for(Panel panel:this.pruebapanels)
+        {
+            panel.getMine().calculateGain();
+            total=total+panel.getMine().getTotalGain().getLast();
+            System.out.println(panel.getMine().getTotalGain());
+        }
+        this.totalGain.add(total);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+       LinkedList<Mine> listMines=new LinkedList<Mine>();
+       for(Panel p:this.pruebapanels)
+       {
+           listMines.add(p.getMine());
+       }
+        DijkstraGrapich m = new DijkstraGrapich(this, true, listMines);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        LinkedList<Mine> listMines=new LinkedList<Mine>();
+       for(Panel p:this.pruebapanels)
+       {
+           listMines.add(p.getMine());
+       }
+        GainGrapich m = new GainGrapich(this, true, listMines,this.totalGain);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -398,6 +701,9 @@ public class Minerals_Minerals extends javax.swing.JFrame
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 }

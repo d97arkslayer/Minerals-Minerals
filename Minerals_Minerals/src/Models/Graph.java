@@ -54,7 +54,6 @@ public class Graph
     
     public void calculateDijkstra(String initialNodeName)
     {
-        long startTime = System.currentTimeMillis();
         int initialPositionNode = 0;
         for (int i = 0; i < this.listNodes.size(); i++) 
         {
@@ -72,8 +71,6 @@ public class Graph
         String nextNode=searchLower();
         dijkstra(nextNode);
         System.out.println(this.dijkstra);
-        long endTime = System.currentTimeMillis() - startTime; 
-        System.out.println(endTime);
     }
     
     private void dijkstra(String nodeName)

@@ -30,6 +30,9 @@ public class Mine
     private String unitSpeed;
     private double amountForDeposit;
     private String unitAmount;
+    private LinkedList<Long> dikjstraTime;
+    private int asignedminers;
+    private LinkedList<Integer> totalGain;
 
     public Mine()
     {
@@ -42,11 +45,28 @@ public class Mine
         this.amount = amount;
         this.metal = metal;
         this.matrix = new LinkedList<>();
+        this.dikjstraTime=new LinkedList<>();
         this.listMiners = new LinkedList<>();
         this.amountOfDeposits = 0;
         this.graph = new Graph();
+        this.totalGain=new LinkedList<>();
     }
 
+    public void calculateGain()
+    {
+        if(this.asignedminers<this.amountOfDeposits)
+        {
+            this.getTotalGain().add((this.asignedminers*800));
+        }
+        else if(this.asignedminers==this.amountOfDeposits)
+        {
+            this.getTotalGain().add((this.asignedminers*950));
+        }
+        else
+        {
+            this.getTotalGain().add((this.amountOfDeposits*250)-(this.amountOfDeposits-this.asignedminers*120));
+        }
+    }
     public void route(String end, int miner)
     {
         String start = "";
@@ -107,6 +127,7 @@ public class Mine
 
     public void dijkstra()
     {
+        long startTime = System.currentTimeMillis();
         String nodeName = "";
         for (int i = 0; i < this.matrix.size(); i++)
         {
@@ -121,6 +142,8 @@ public class Mine
             }
         }
         this.graph.calculateDijkstra(nodeName);
+        this.dikjstraTime.add(System.currentTimeMillis() - startTime); 
+        System.out.println(this.dikjstraTime.getLast());
     }
 
     public void createGraph()
@@ -702,6 +725,50 @@ public class Mine
     {
         this.unitAmount = unitAmount;
     }
+
+    /**
+     * @return the dikjstraTime
+     */
+    public LinkedList<Long> getDikjstraTime() {
+        return dikjstraTime;
+    }
+
+    /**
+     * @param dikjstraTime the dikjstraTime to set
+     */
+    public void setDikjstraTime(LinkedList<Long> dikjstraTime) {
+        this.dikjstraTime = dikjstraTime;
+    }
+
+    /**
+     * @return the asignedminers
+     */
+    public int getAsignedminers() {
+        return asignedminers;
+    }
+
+    /**
+     * @param asignedminers the asignedminers to set
+     */
+    public void setAsignedminers(int asignedminers) {
+        this.asignedminers = asignedminers;
+    }
+
+    /**
+     * @return the totalGain
+     */
+    public LinkedList<Integer> getTotalGain() {
+        return totalGain;
+    }
+
+    /**
+     * @param totalGain the totalGain to set
+     */
+    public void setTotalGain(LinkedList<Integer> totalGain) {
+        this.totalGain = totalGain;
+    }
+
+    
 
     /**
      * @return the matrix

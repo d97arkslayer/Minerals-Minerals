@@ -27,15 +27,15 @@ public class Panel extends javax.swing.JPanel
 
     /**
      * Creates new form Panel
-     *
-     * @param h
-     * @param w
      */
+    public Panel()
+    {
+        initComponents();
+    }
     public Panel(int h, int w)
     {
         initComponents();
         this.setPreferredSize(new Dimension(w, h));
-
     }
 
     private void minersFollowRoute()

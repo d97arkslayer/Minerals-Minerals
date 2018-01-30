@@ -59,6 +59,11 @@ public class JsonLoadProcess
         return this.model.getInfoMinas();
     }
 
+    public MinersJson getMinersInfo()
+    {
+        return this.model.getInfoMineros();
+    }
+
     public void extractMines()
     {
         int count = 0;
@@ -126,20 +131,15 @@ public class JsonLoadProcess
 
             Road r = (Road) aux.getMatrix().get(mine.getEntradaMina().getY()).get(mine.getEntradaMina().getX()).getObject();
             r.setEntry(true);
-            if(mine.getEntradaMina().getX()==0)
-            {
+            if (mine.getEntradaMina().getX() == 0)
                 r.setLocationEntry(1);
-            }
-            else if(mine.getEntradaMina().getY()==0){
+            else if (mine.getEntradaMina().getY() == 0)
                 r.setLocationEntry(2);
-            }
-            else if(aux.getMatrix().size()-1==mine.getEntradaMina().getY()){
+            else if (aux.getMatrix().size() - 1 == mine.getEntradaMina().getY())
                 r.setLocationEntry(4);
-            }
-            else{
+            else
                 r.setLocationEntry(3);
-            }
-            
+
             aux.getMatrix().get(mine.getEntradaMina().getY()).get(mine.getEntradaMina().getX()).setObject(r);
             aux.setAmount(amount * aux.getAmountForDeposit());
             aux.setAmountOfDeposits(amount);

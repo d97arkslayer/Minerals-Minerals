@@ -25,16 +25,16 @@ public class JsonSaveProcess
     {
     }
 
-    public JsonSaveProcess(LinkedList<Mine> mines, InformationMineJson generalInformation)
+    public JsonSaveProcess(LinkedList<Mine> mines, InformationMineJson generalInformation, MinersJson minersInfo)
     {
         this.information = new JsonModel();
         this.information.setInfoMinas(generalInformation);
+        this.information.setInfoMineros(minersInfo);
         this.mines = mines;
     }
 
     public String save()
     {
-        this.minersInformation();
         this.minesInformation();
         Gson gson = new Gson();
         String json = gson.toJson(this.information);
@@ -43,37 +43,6 @@ public class JsonSaveProcess
 //        JsonModel m = load.fromJson(json, JsonModel.class);
 //        System.out.println(m.getMinas().getFirst().getEntradaMina().getX());
 
-    }
-
-    public void minersInformation()
-    {
-        int totalMiners = 0;
-        int mO = 0;
-        int mP = 0;
-        int mC = 0;
-        int mComodin = 0;
-        for (Mine m : this.mines)
-        {
-            totalMiners += m.getListMiners().size();
-            for (int i = 0; i < m.getListMiners().size(); i++)
-            {
-                switch (m.getListMiners().get(i).getEspeciality())
-                {
-                    case "oro":
-                        mO++;
-                        break;
-                    case "plata":
-                        mP++;
-                        break;
-                    case "cobre":
-                        mC++;
-                        break;
-                    case "comodin":
-                        mComodin++;
-                }
-            }
-        }
-        this.information.setInfoMineros(new MinersJson(totalMiners, mO, mP, mC, mComodin));
     }
 
     public void minesInformation()

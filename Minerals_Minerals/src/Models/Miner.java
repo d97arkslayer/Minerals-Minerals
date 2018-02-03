@@ -34,6 +34,10 @@ public class Miner implements Runnable
     private boolean followRoute;
     private LinkedList<String> route;
     private String especiality;
+    private double currentCapacity; 
+    private SectionMap workPlace;
+    private String workLocate;
+    private Double earnings;
 
     public Miner()
     {
@@ -56,9 +60,12 @@ public class Miner implements Runnable
         this.widthBox = 50;
         this.heightBox = 40;
         this.nombre = nombre;
+        this.currentCapacity=0;
         this.imageBox = new ImageIcon(getClass().getResource("../Images/miner_box.png"));
         this.followRoute = false;
         this.route = new LinkedList<>();
+        this.workLocate="";
+        this.earnings=0.0;
         loadSprite();
     }
 
@@ -108,6 +115,21 @@ public class Miner implements Runnable
     {
         this.direction = newDirection;
         loadSprite();
+    }
+    
+    public void resetDirection()
+    {
+        switch (this.direction) {
+            case 1:
+                this.changeDirection(3);
+                break;
+            case 2:
+                this.changeDirection(4);
+            case 3:
+                this.changeDirection(1);
+            case 4:
+                this.changeDirection(2);
+        }
     }
 
     /*
@@ -508,6 +530,62 @@ public class Miner implements Runnable
     public void setEspeciality(String especiality)
     {
         this.especiality = especiality;
+    }
+
+    /**
+     * @return the currentCapacity
+     */
+    public double getCurrentCapacity() {
+        return currentCapacity;
+    }
+
+    /**
+     * @param currentCapacity the currentCapacity to set
+     */
+    public void setCurrentCapacity(double currentCapacity) {
+        this.currentCapacity = currentCapacity;
+    }
+
+    /**
+     * @return the workPlace
+     */
+    public SectionMap getWorkPlace() {
+        return workPlace;
+    }
+
+    /**
+     * @param workPlace the workPlace to set
+     */
+    public void setWorkPlace(SectionMap workPlace) {
+        this.workPlace = workPlace;
+    }
+
+    /**
+     * @return the workLocate
+     */
+    public String getWorkLocate() {
+        return workLocate;
+    }
+
+    /**
+     * @param workLocate the workLocate to set
+     */
+    public void setWorkLocate(String workLocate) {
+        this.workLocate = workLocate;
+    }
+
+    /**
+     * @return the earnings
+     */
+    public Double getEarnings() {
+        return earnings;
+    }
+
+    /**
+     * @param earnings the earnings to set
+     */
+    public void setEarnings(Double earnings) {
+        this.earnings = earnings;
     }
 
 }

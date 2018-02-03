@@ -36,6 +36,7 @@ public class Minerals_Minerals extends javax.swing.JFrame
 {
 
     int countMines = 1;
+    AdministrarNombresMineros nombreMineros=new AdministrarNombresMineros();
     LinkedList<Integer> totalGain = new LinkedList<>();
     LinkedList<JPanel> panels = new LinkedList<>();
     InformationMineJson generalInformation = new InformationMineJson();
@@ -43,6 +44,8 @@ public class Minerals_Minerals extends javax.swing.JFrame
     LinkedList<Panel> pruebapanels = new LinkedList<>();
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     LinkedList<Thread> minersThreads = new LinkedList<>();
+    LinkedList<Thread> mineThreads = new LinkedList<>();
+    LinkedList<Thread> panelsThreads=new LinkedList<>();
 
     /**
      * Creates new form Minerals_Minerals
@@ -697,7 +700,6 @@ public class Minerals_Minerals extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-
         TypeMetal t = new TypeMetal(this, true);
         Mine mine = new Mine(this.countMines, t.getMetal(), t.getAmount());
         ViewInfoMine v = new ViewInfoMine(this, true);
@@ -706,10 +708,29 @@ public class Minerals_Minerals extends javax.swing.JFrame
         JPanel jp = new JPanel();
         jp.setBackground(Color.BLUE);
         Panel pAux = new Panel((int) (this.screenSize.getWidth()), (int) (this.screenSize.height));
+        this.panelsThreads.add(new Thread(pAux));
+        this.panelsThreads.getLast().start();
         jp.removeAll();
         ((FlowLayout) jp.getLayout()).setAlignment(FlowLayout.LEADING);
         pAux.setMine(mine);
         this.pruebapanels.add(pAux);
+        this.pruebapanels.getLast().getMine().setCollectQuantity(1.0);
+        this.mineThreads.add(new Thread(this.pruebapanels.getLast().getMine()));
+        this.mineThreads.getLast().start();
+        this.pruebapanels.getLast().getMine().createGraph();
+        this.pruebapanels.getLast().getMine().dijkstra();
+        if(this.pruebapanels.getLast().getMine().getMetal().equalsIgnoreCase("oro"))
+        {
+            this.pruebapanels.getLast().getMine().setCapacityCharge(this.generalInformation.getCapacidadCargaOro());
+        }
+        else if(this.pruebapanels.getLast().getMine().getMetal().equalsIgnoreCase("plata"))
+        {
+            this.pruebapanels.getLast().getMine().setCapacityCharge(this.generalInformation.getCapacidadCargaPlata());
+        }
+        else
+        {
+            this.pruebapanels.getLast().getMine().setCapacityCharge(this.generalInformation.getCapacidadCargaCobre());
+        }
         jp.add(pAux);
         this.panels.add(jp);
         this.jTabbedPane1.add("Mina " + this.countMines, this.panels.getLast());
@@ -728,26 +749,26 @@ public class Minerals_Minerals extends javax.swing.JFrame
                         switch (road.getLocationEntry())
                         {
                             case 1:
-                                this.pruebapanels.getFirst().getMine().getListMiners().add(new Miner(road.getX(), road.getY() + 2, 2, "Luz"));
-                                this.pruebapanels.getFirst().getMine().getListMiners().getFirst().setMovement(true);
+                                this.pruebapanels.getFirst().getMine().getListMiners().add(new Miner(road.getX(), road.getY() + 2, 2, this.nombreMineros.getNombreMinero()));
+                                this.pruebapanels.getFirst().getMine().getListMiners().getLast().setMovement(true);
                                 this.minersThreads.add(new Thread(this.pruebapanels.getFirst().getMine().getListMiners().getLast()));
                                 this.minersThreads.getLast().start();
                                 break;
                             case 2:
-                                this.pruebapanels.getFirst().getMine().getListMiners().add(new Miner(road.getX() + 2, road.getY(), 3, "Luz"));
-                                this.pruebapanels.getFirst().getMine().getListMiners().getFirst().setMovement(true);
+                                this.pruebapanels.getFirst().getMine().getListMiners().add(new Miner(road.getX() + 2, road.getY(), 3, this.nombreMineros.getNombreMinero()));
+                                this.pruebapanels.getFirst().getMine().getListMiners().getLast().setMovement(true);
                                 this.minersThreads.add(new Thread(this.pruebapanels.getFirst().getMine().getListMiners().getLast()));
                                 this.minersThreads.getLast().start();
                                 break;
                             case 3:
-                                this.pruebapanels.getFirst().getMine().getListMiners().add(new Miner(road.getX(), road.getY() + 2, 4, "Luz"));
-                                this.pruebapanels.getFirst().getMine().getListMiners().getFirst().setMovement(true);
+                                this.pruebapanels.getFirst().getMine().getListMiners().add(new Miner(road.getX(), road.getY() + 2, 4, this.nombreMineros.getNombreMinero()));
+                                this.pruebapanels.getFirst().getMine().getListMiners().getLast().setMovement(true);
                                 this.minersThreads.add(new Thread(this.pruebapanels.getFirst().getMine().getListMiners().getLast()));
                                 this.minersThreads.getLast().start();
                                 break;
                             case 4:
-                                this.pruebapanels.getFirst().getMine().getListMiners().add(new Miner(road.getX() + 2, road.getY(), 1, "Luz"));
-                                this.pruebapanels.getFirst().getMine().getListMiners().getFirst().setMovement(true);
+                                this.pruebapanels.getFirst().getMine().getListMiners().add(new Miner(road.getX() + 2, road.getY(), 1, this.nombreMineros.getNombreMinero()));
+                                this.pruebapanels.getFirst().getMine().getListMiners().getLast().setMovement(true);
                                 this.minersThreads.add(new Thread(this.pruebapanels.getFirst().getMine().getListMiners().getLast()));
                                 this.minersThreads.getLast().start();
                                 break;
@@ -813,26 +834,40 @@ public class Minerals_Minerals extends javax.swing.JFrame
     }//GEN-LAST:event_btnLoadActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        int count = 1;
-        while (count <= 3)
+        LinkedList<Mine> listMinesOro = new LinkedList<>();
+        LinkedList<Mine> listMinesPlata = new LinkedList<>();
+        LinkedList<Mine> listMinesCobre = new LinkedList<>();
+        LinkedList<Mine> listMine = new LinkedList<>();
+        for (Panel panel : this.pruebapanels)
         {
-            LinkedList<Mine> listMines = new LinkedList<>();
-            for (Panel panel : this.pruebapanels)
+            if (panel.getMine().getMetal().equalsIgnoreCase("oro"))
             {
-                if (count == 1 && panel.getMine().getMetal().equalsIgnoreCase("oro"))
-                    listMines.add(panel.getMine());
-            }
-            if (!listMines.isEmpty())
+                listMinesOro.add(panel.getMine());
+            }else if(panel.getMine().getMetal().equalsIgnoreCase("cobre"))
             {
-                this.locateMiners(listMines, 13);
-                count++;
+                listMinesCobre.add(panel.getMine());
+            }else
+            {
+                listMinesCobre.add(panel.getMine());
             }
-            else
-                count++;
+            listMine.add(panel.getMine());
         }
+        if (!listMinesOro.isEmpty())
+        {
+            this.locateMiners(listMinesOro, this.minersInfo.getTotalMinerosOro());
+        }else if (!listMinesCobre.isEmpty())
+        {
+            this.locateMiners(listMinesCobre, this.minersInfo.getTotalMinerosCobre());
+        }
+        else if (!listMinesPlata.isEmpty())
+        {
+            this.locateMiners(listMinesPlata, this.minersInfo.getTotalMinerosPlata());
+        }
+        this.locateMiners(listMine, this.minersInfo.getTotalMineros());
         int total = 0;
         for (Panel panel : this.pruebapanels)
         {
+            panel.getMine().createMiners(this.mineThreads);
             panel.getMine().calculateGain();
             total = total + panel.getMine().getTotalGain().getLast();
             System.out.println(panel.getMine().getTotalGain());

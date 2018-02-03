@@ -7,12 +7,14 @@ package Models;
 
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author darkd
  */
-public class Mine
+public class Mine implements  Runnable
 {
 
     private int id;
@@ -33,6 +35,8 @@ public class Mine
     private LinkedList<Long> dikjstraTime;
     private int asignedminers;
     private LinkedList<Integer> totalGain;
+    private double capacityCharge;
+    private double  collectQuantity;
 
     public Mine()
     {
@@ -43,6 +47,7 @@ public class Mine
     {
         this.id = id;
         this.amount = amount;
+        this.capacityCharge=0;
         this.metal = metal;
         this.matrix = new LinkedList<>();
         this.dikjstraTime=new LinkedList<>();
@@ -50,6 +55,23 @@ public class Mine
         this.amountOfDeposits = 0;
         this.graph = new Graph();
         this.totalGain=new LinkedList<>();
+        this.loadDeposits();
+    }
+    
+    private void loadDeposits()
+    {
+        for (int i = 0; i < this.matrix.size(); i++) 
+        {
+            for (int j = 0; j < this.matrix.get(i).size(); j++) 
+            {
+                if(this.matrix.get(i).get(j).getObject() instanceof Deposit)
+                {
+                    Deposit deposit=(Deposit)this.matrix.get(i).get(j).getObject();
+                    deposit.setAmount(this.amount);
+                    this.matrix.get(i).get(j).setObject(deposit);
+                }
+            }
+        }
     }
 
     public void calculateGain()
@@ -145,10 +167,67 @@ public class Mine
         this.dikjstraTime.add(System.currentTimeMillis() - startTime); 
         System.out.println(this.dikjstraTime.getLast());
     }
-
+    
+    public void createMiners(LinkedList<Thread> listThread)
+    {
+        boolean flag=false;
+        int i=0;
+        int x=0;
+        int y=0;
+        int direction=0;
+        while(!flag)
+        {
+            for (int j = 0; j < this.matrix.get(i).size(); j++) 
+            {
+                if(this.matrix.get(i).get(j).getObject() instanceof Road)
+                {
+                    Road road=(Road) this.matrix.get(i).get(j).getObject();
+                    if(road.isEntry())
+                    {
+                        flag=true;
+                        switch(road.getLocationEntry())
+                        {
+                            case 1:
+                                x=road.getX();
+                                y=road.getY();
+                                direction=2;
+                                break;
+                            case 2:
+                                x=road.getX();
+                                y=road.getY();
+                                direction=3;
+                                break;
+                            case 3:
+                                x=road.getX();
+                                y=road.getY();
+                                direction=4;
+                                break;
+                            case 4:
+                                x=road.getX();
+                                y=road.getY();
+                                direction=1;
+                                break;
+                        }
+                    }
+                }
+            }
+            i++;
+        }
+        for (int j = 1; j <= this.asignedminers; j++)
+        {
+            this.listMiners.add(new Miner(x, y, direction, "luz"));
+            this.listMiners.getLast().setMovement(true);
+            listThread.add(new Thread(this.listMiners.getLast()));
+            listThread.getLast().start();
+        }
+    }
+    
+    
     public void createGraph()
     {
+        this.graph=new Graph();
         LinkedList<String> listNodes = getNameGraphNodes();
+        
         listNodes.forEach((name) ->
         {
             this.graph.addNode(name);
@@ -485,7 +564,21 @@ public class Mine
             }
         }
     }
-
+    
+    public void stopWorking(String workLocate)
+    {
+        for (Miner miner : this.listMiners) 
+        {
+            if(miner.getWorkLocate().equalsIgnoreCase(workLocate))
+            {
+                miner.setWorkLocate("");
+                miner.setState("mover");
+                miner.setWorkPlace(null);
+                miner.setCountAnimation(0);
+            }
+        }
+    }
+    
     /**
      * @return the id
      */
@@ -768,9 +861,83 @@ public class Mine
         this.totalGain = totalGain;
     }
 
+    /**
+     * @return the capacityCharge
+     */
+    public double getCapacityCharge() {
+        return capacityCharge;
+    }
+
+    /**
+     * @param capacityCharge the capacityCharge to set
+     */
+    public void setCapacityCharge(double capacityCharge) {
+        this.capacityCharge = capacityCharge;
+    }
+
+    /**
+     * @return the collectQuantity
+     */
+    public double getCollectQuantity() {
+        return collectQuantity;
+    }
+
+    /**
+     * @param collectQuantity the collectQuantity to set
+     */
+    public void setCollectQuantity(double collectQuantity) {
+        this.collectQuantity = collectQuantity;
+    }
+   
+    @Override
+    public void run() {
+        while(true)
+        {
+            for (int i = 0; i < this.listMiners.size(); i++) {
+                if(this.listMiners.get(i).getState().equalsIgnoreCase("trabajo"))
+                {
+                    Deposit deposit=(Deposit) this.listMiners.get(i).getWorkPlace().getObject();
+                    deposit.setAmount(deposit.getAmount()-this.collectQuantity);
+                    this.listMiners.get(i).setCurrentCapacity(this.listMiners.get(i).getCurrentCapacity()+this.collectQuantity);
+                    if(this.listMiners.get(i).getCurrentCapacity()>=this.capacityCharge)
+                    {
+                        this.listMiners.get(i).setCountAnimation(0);
+                        this.listMiners.get(i).setCurrentCapacity(0);
+                        this.route(this.listMiners.get(i).getWorkLocate(), i);
+                    }
+                    if(deposit.getAmount()<=0)
+                    {
+                        Road road=new Road(deposit.getX(), deposit.getY(), false, 0);
+                        this.listMiners.get(i).getWorkPlace().setObject(road);
+                        this.stopWorking(this.listMiners.get(i).getWorkLocate());
+                        this.listMiners.get(i).setWorkPlace(null);
+                        this.listMiners.get(i).setWorkLocate("");
+                        this.listMiners.get(i).setCountAnimation(0);
+                        this.listMiners.get(i).setState("mover");
+                        this.createGraph();
+                        this.dijkstra();
+                        this.amountOfDeposits--;
+                    }
+                }
+            }
+            try {
+                long time=0;
+                if(this.unitTimeToExtract.equalsIgnoreCase("segundos"))
+                {
+                    time=(long)this.timeToExtract*1000;
+                }
+                Thread.sleep(time);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Mine.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
     
 
     /**
      * @return the matrix
      */
 }
+
+

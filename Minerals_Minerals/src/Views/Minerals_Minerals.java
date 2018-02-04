@@ -36,7 +36,7 @@ public class Minerals_Minerals extends javax.swing.JFrame
 {
 
     int countMines = 1;
-    AdministrarNombresMineros nombreMineros=new AdministrarNombresMineros();
+    AdministrarNombresMineros nombreMineros = new AdministrarNombresMineros();
     LinkedList<Integer> totalGain = new LinkedList<>();
     LinkedList<JPanel> panels = new LinkedList<>();
     InformationMineJson generalInformation = new InformationMineJson();
@@ -45,7 +45,7 @@ public class Minerals_Minerals extends javax.swing.JFrame
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     LinkedList<Thread> minersThreads = new LinkedList<>();
     LinkedList<Thread> mineThreads = new LinkedList<>();
-    LinkedList<Thread> panelsThreads=new LinkedList<>();
+    LinkedList<Thread> panelsThreads = new LinkedList<>();
 
     /**
      * Creates new form Minerals_Minerals
@@ -714,23 +714,17 @@ public class Minerals_Minerals extends javax.swing.JFrame
         ((FlowLayout) jp.getLayout()).setAlignment(FlowLayout.LEADING);
         pAux.setMine(mine);
         this.pruebapanels.add(pAux);
-        this.pruebapanels.getLast().getMine().setCollectQuantity(1.0);
+        //this.pruebapanels.getLast().getMine().setCollectQuantity(1.0);
         this.mineThreads.add(new Thread(this.pruebapanels.getLast().getMine()));
         this.mineThreads.getLast().start();
         this.pruebapanels.getLast().getMine().createGraph();
         this.pruebapanels.getLast().getMine().dijkstra();
-        if(this.pruebapanels.getLast().getMine().getMetal().equalsIgnoreCase("oro"))
-        {
+        if (this.pruebapanels.getLast().getMine().getMetal().equalsIgnoreCase("oro"))
             this.pruebapanels.getLast().getMine().setCapacityCharge(this.generalInformation.getCapacidadCargaOro());
-        }
-        else if(this.pruebapanels.getLast().getMine().getMetal().equalsIgnoreCase("plata"))
-        {
+        else if (this.pruebapanels.getLast().getMine().getMetal().equalsIgnoreCase("plata"))
             this.pruebapanels.getLast().getMine().setCapacityCharge(this.generalInformation.getCapacidadCargaPlata());
-        }
         else
-        {
             this.pruebapanels.getLast().getMine().setCapacityCharge(this.generalInformation.getCapacidadCargaCobre());
-        }
         jp.add(pAux);
         this.panels.add(jp);
         this.jTabbedPane1.add("Mina " + this.countMines, this.panels.getLast());
@@ -841,28 +835,19 @@ public class Minerals_Minerals extends javax.swing.JFrame
         for (Panel panel : this.pruebapanels)
         {
             if (panel.getMine().getMetal().equalsIgnoreCase("oro"))
-            {
                 listMinesOro.add(panel.getMine());
-            }else if(panel.getMine().getMetal().equalsIgnoreCase("cobre"))
-            {
+            else if (panel.getMine().getMetal().equalsIgnoreCase("cobre"))
                 listMinesCobre.add(panel.getMine());
-            }else
-            {
+            else
                 listMinesCobre.add(panel.getMine());
-            }
             listMine.add(panel.getMine());
         }
         if (!listMinesOro.isEmpty())
-        {
             this.locateMiners(listMinesOro, this.minersInfo.getTotalMinerosOro());
-        }else if (!listMinesCobre.isEmpty())
-        {
+        else if (!listMinesCobre.isEmpty())
             this.locateMiners(listMinesCobre, this.minersInfo.getTotalMinerosCobre());
-        }
         else if (!listMinesPlata.isEmpty())
-        {
             this.locateMiners(listMinesPlata, this.minersInfo.getTotalMinerosPlata());
-        }
         this.locateMiners(listMine, this.minersInfo.getTotalMineros());
         int total = 0;
         for (Panel panel : this.pruebapanels)
@@ -953,6 +938,16 @@ public class Minerals_Minerals extends javax.swing.JFrame
             ((FlowLayout) jp.getLayout()).setAlignment(FlowLayout.LEADING);
             pAux.setMine(m);
             this.pruebapanels.add(pAux);
+            this.mineThreads.add(new Thread(this.pruebapanels.getLast().getMine()));
+            this.mineThreads.getLast().start();
+            this.pruebapanels.getLast().getMine().createGraph();
+            this.pruebapanels.getLast().getMine().dijkstra();
+            if (this.pruebapanels.getLast().getMine().getMetal().equalsIgnoreCase("oro"))
+                this.pruebapanels.getLast().getMine().setCapacityCharge(this.generalInformation.getCapacidadCargaOro());
+            else if (this.pruebapanels.getLast().getMine().getMetal().equalsIgnoreCase("plata"))
+                this.pruebapanels.getLast().getMine().setCapacityCharge(this.generalInformation.getCapacidadCargaPlata());
+            else
+                this.pruebapanels.getLast().getMine().setCapacityCharge(this.generalInformation.getCapacidadCargaCobre());
             jp.add(pAux);
             this.panels.add(jp);
             this.jTabbedPane1.add("Mina " + this.countMines, this.panels.getLast());

@@ -17,6 +17,7 @@ public class MineJSON
     private String tipoMineral;
     private int capacidadMineros;
     private double capacidadDeposito;
+    private double cantidadRecoleccion;
     private String unidadCapacidad;
     private double tiempoExtraccion;
     private String unidadTiempo;
@@ -27,9 +28,10 @@ public class MineJSON
     private MineEntrance entradaMina;
     private LinkedList<SectionJson> seccionesMina;
 
-    public MineJSON(String tipoMineral, int capacidadMineros, double capacidadDeposito, String unidadCapacidad, double tiempoExtraccion, String unidadTiempo, double velocidadDesplazamiento, String unidadVelocidad)
+    public MineJSON(String tipoMineral, int capacidadMineros, double capacidadDeposito, String unidadCapacidad, double tiempoExtraccion, String unidadTiempo, double velocidadDesplazamiento, String unidadVelocidad, double cantidadRecoleccion)
     {
         this.tipoMineral = tipoMineral;
+        this.cantidadRecoleccion = cantidadRecoleccion;
         this.capacidadMineros = capacidadMineros;
         this.capacidadDeposito = capacidadDeposito;
         this.unidadCapacidad = unidadCapacidad;
@@ -47,6 +49,7 @@ public class MineJSON
         this.capacidadMineros = 0;
         this.capacidadDeposito = 0;
         this.unidadCapacidad = "";
+        this.cantidadRecoleccion = 0;
         this.tiempoExtraccion = 0;
         this.unidadTiempo = "";
         this.velocidadDesplazamiento = 0;
@@ -247,5 +250,21 @@ public class MineJSON
     public void setSeccionesMina(LinkedList<SectionJson> seccionesMina)
     {
         this.seccionesMina = seccionesMina;
+    }
+
+    /**
+     * @return the cantidadRecoleccion
+     */
+    public double getCantidadRecoleccion()
+    {
+        return cantidadRecoleccion;
+    }
+
+    /**
+     * @param cantidadRecoleccion the cantidadRecoleccion to set
+     */
+    public void setCantidadRecoleccion(double cantidadRecoleccion)
+    {
+        this.cantidadRecoleccion = cantidadRecoleccion;
     }
 }

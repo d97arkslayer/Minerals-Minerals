@@ -49,7 +49,7 @@ public class JsonSaveProcess
     {
         this.mines.stream().map((m) ->
         {
-            MineJSON myMine = new MineJSON(m.getMetal(), m.getMaxMiners(), m.getAmountForDeposit(), m.getUnitAmount(), m.getTimeToExtract(), m.getUnitTimeToExtract(), m.getSpeed(), m.getUnitSpeed());
+            MineJSON myMine = new MineJSON(m.getMetal(), m.getMaxMiners(), m.getAmountForDeposit(), m.getUnitAmount(), m.getTimeToExtract(), m.getUnitTimeToExtract(), m.getSpeed(), m.getUnitSpeed(), m.getCollectQuantity());
             myMine.setAlto(m.getMatrix().size());
             myMine.setAncho(m.getMatrix().getFirst().size());
             for (int i = 0; i < m.getMatrix().size(); i++)

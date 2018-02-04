@@ -80,6 +80,7 @@ public class JsonLoadProcess
             aux.setUnitTimeToExtract(mine.getUnidadTiempo());
             aux.setSpeed(mine.getVelocidadDesplazamiento());
             aux.setUnitSpeed(mine.getUnidadVelocidad());
+            aux.setCollectQuantity(mine.getCantidadRecoleccion());
             LinkedList<SectionMap> L = new LinkedList<>();
             L.add(new SectionMap(new Wall(0, 0)));
             aux.getMatrix().add(L);

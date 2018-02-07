@@ -37,6 +37,8 @@ public class Mine implements  Runnable
     private LinkedList<Integer> totalGain;
     private double capacityCharge;
     private double  collectQuantity;
+    private double earnigs;
+    AdministrarNombresMineros Nombre=new AdministrarNombresMineros();
 
     public Mine()
     {
@@ -86,7 +88,7 @@ public class Mine implements  Runnable
         }
         else
         {
-            this.getTotalGain().add((this.amountOfDeposits*250)-(this.amountOfDeposits-this.asignedminers*120));
+            this.getTotalGain().add((this.amountOfDeposits*250)-((this.asignedminers-this.amountOfDeposits)*120));
         }
     }
     public void route(String end, int miner)
@@ -215,7 +217,7 @@ public class Mine implements  Runnable
         }
         for (int j = 1; j <= this.asignedminers; j++)
         {
-            this.listMiners.add(new Miner(x, y, direction, "luz"));
+            this.listMiners.add(new Miner(x, y, direction, Nombre.getNombreMinero()));
             this.listMiners.getLast().setMovement(true);
             listThread.add(new Thread(this.listMiners.getLast()));
             listThread.getLast().start();
@@ -579,6 +581,15 @@ public class Mine implements  Runnable
         }
     }
     
+    private void cleanMiners()
+    {
+        for(Miner miners:this.listMiners)
+        {
+            miners.setEarnings(this.earnigs*miners.getCurrentCapacity());
+        }
+        this.listMiners.clear();
+    }
+    
     /**
      * @return the id
      */
@@ -904,6 +915,7 @@ public class Mine implements  Runnable
                         this.listMiners.get(i).setCountAnimation(0);
                         this.listMiners.get(i).setCurrentCapacity(0);
                         this.route(this.listMiners.get(i).getWorkLocate(), i);
+                        this.listMiners.get(i).setEarnings(this.listMiners.get(i).getEarnings()*this.listMiners.get(i).getCurrentCapacity());
                     }
                     if(deposit.getAmount()<=0)
                     {
@@ -918,6 +930,10 @@ public class Mine implements  Runnable
                         this.dijkstra();
                         this.amountOfDeposits--;
                     }
+                    if(this.amountOfDeposits==0)
+                    {
+                        cleanMiners();
+                    }
                 }
             }
             try {
@@ -931,6 +947,20 @@ public class Mine implements  Runnable
                 Logger.getLogger(Mine.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+
+    /**
+     * @return the earnigs
+     */
+    public double getEarnigs() {
+        return earnigs;
+    }
+
+    /**
+     * @param earnigs the earnigs to set
+     */
+    public void setEarnigs(double earnigs) {
+        this.earnigs = earnigs;
     }
 
     

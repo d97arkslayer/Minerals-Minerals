@@ -38,7 +38,7 @@ public class Panel extends javax.swing.JPanel implements Runnable
         this.setPreferredSize(new Dimension(w, h));
     }
 
-    private void minersFollowRoute()
+    public void minersFollowRoute()
     {
        if(!this.mine.getListMiners().isEmpty())
        {
@@ -142,7 +142,7 @@ public class Panel extends javax.swing.JPanel implements Runnable
        }
     }
 
-    private void minersWork()
+    public void minersWork()
     {
         if(!this.mine.getListMiners().isEmpty())
         {
@@ -188,7 +188,7 @@ public class Panel extends javax.swing.JPanel implements Runnable
         }
     }
 
-    private void minersMovement()
+    public void minersMovement()
     {
 //        LinkedList<Integer> roads = new LinkedList<>();
 //        LinkedList<Integer> deposits = new LinkedList<>();

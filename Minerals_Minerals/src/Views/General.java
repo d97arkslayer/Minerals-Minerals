@@ -7,6 +7,7 @@ package Views;
 
 import Models.JSON.InformationMineJson;
 import Models.JSON.MinersJson;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -328,12 +329,17 @@ public class General extends javax.swing.JDialog
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
     {//GEN-HEADEREND:event_jButton1ActionPerformed
-        this.minersInfo = new MinersJson(Integer.parseInt(this.totalMiners.getText()), Integer.parseInt(this.goldMiners.getText()), Integer.parseInt(this.silverMiners.getText()), Integer.parseInt(this.copperMiners.getText()), Integer.parseInt(this.jokerMiners.getText()));
-        this.generalInformation = new InformationMineJson(Double.parseDouble(this.goldWeight.getText()),
-                Double.parseDouble(this.silverWeight.getText()), Double.parseDouble(this.copperWeight.getText()), this.weightUnit.getSelectedItem().toString(),
-                Double.parseDouble(this.goldPrice.getText()), Double.parseDouble(this.silverPrice.getText()), Double.parseDouble(this.copperPrice.getText()));
-        this.setVisible(false);
-        this.dispose();
+        if ((Integer.parseInt(this.jokerMiners.getText())) < (0.1 * (Integer.parseInt(this.totalMiners.getText()))))
+        {
+            this.minersInfo = new MinersJson(Integer.parseInt(this.totalMiners.getText()), Integer.parseInt(this.goldMiners.getText()), Integer.parseInt(this.silverMiners.getText()), Integer.parseInt(this.copperMiners.getText()), Integer.parseInt(this.jokerMiners.getText()));
+            this.generalInformation = new InformationMineJson(Double.parseDouble(this.goldWeight.getText()),
+                    Double.parseDouble(this.silverWeight.getText()), Double.parseDouble(this.copperWeight.getText()), this.weightUnit.getSelectedItem().toString(),
+                    Double.parseDouble(this.goldPrice.getText()), Double.parseDouble(this.silverPrice.getText()), Double.parseDouble(this.copperPrice.getText()));
+            this.setVisible(false);
+            this.dispose();
+        }
+        JOptionPane.showMessageDialog(null, "La cantidad de mineros comodines no puede ser mas del 10% de los mineros totales "
+                + "\n Por favor corrija los valores");        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void copperMinersActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_copperMinersActionPerformed

@@ -34,10 +34,12 @@ public class Miner implements Runnable
     private boolean followRoute;
     private LinkedList<String> route;
     private String especiality;
-    private double currentCapacity; 
+    private double currentCapacity;
     private SectionMap workPlace;
     private String workLocate;
     private Double earnings;
+    private boolean status;
+    private boolean comodin;
 
     public Miner()
     {
@@ -60,12 +62,14 @@ public class Miner implements Runnable
         this.widthBox = 50;
         this.heightBox = 40;
         this.nombre = nombre;
-        this.currentCapacity=0;
+        this.currentCapacity = 0;
         this.imageBox = new ImageIcon(getClass().getResource("../Images/miner_box.png"));
         this.followRoute = false;
         this.route = new LinkedList<>();
-        this.workLocate="";
-        this.earnings=0.0;
+        this.workLocate = "";
+        this.earnings = 0.0;
+        this.status = true;
+        this.comodin=false;
         loadSprite();
     }
 
@@ -116,10 +120,11 @@ public class Miner implements Runnable
         this.direction = newDirection;
         loadSprite();
     }
-    
+
     public void resetDirection()
     {
-        switch (this.direction) {
+        switch (this.direction)
+        {
             case 1:
                 this.changeDirection(3);
                 break;
@@ -535,57 +540,97 @@ public class Miner implements Runnable
     /**
      * @return the currentCapacity
      */
-    public double getCurrentCapacity() {
+    public double getCurrentCapacity()
+    {
         return currentCapacity;
     }
 
     /**
      * @param currentCapacity the currentCapacity to set
      */
-    public void setCurrentCapacity(double currentCapacity) {
+    public void setCurrentCapacity(double currentCapacity)
+    {
         this.currentCapacity = currentCapacity;
     }
 
     /**
      * @return the workPlace
      */
-    public SectionMap getWorkPlace() {
+    public SectionMap getWorkPlace()
+    {
         return workPlace;
     }
 
     /**
      * @param workPlace the workPlace to set
      */
-    public void setWorkPlace(SectionMap workPlace) {
+    public void setWorkPlace(SectionMap workPlace)
+    {
         this.workPlace = workPlace;
     }
 
     /**
      * @return the workLocate
      */
-    public String getWorkLocate() {
+    public String getWorkLocate()
+    {
         return workLocate;
     }
 
     /**
      * @param workLocate the workLocate to set
      */
-    public void setWorkLocate(String workLocate) {
+    public void setWorkLocate(String workLocate)
+    {
         this.workLocate = workLocate;
     }
 
     /**
      * @return the earnings
      */
-    public Double getEarnings() {
+    public Double getEarnings()
+    {
         return earnings;
     }
 
     /**
      * @param earnings the earnings to set
      */
-    public void setEarnings(Double earnings) {
+    public void setEarnings(Double earnings)
+    {
         this.earnings = earnings;
+    }
+
+    /**
+     * @return the status
+     */
+    public boolean isStatus()
+    {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(boolean status)
+    {
+        this.status = status;
+    }
+
+    /**
+     * @return the comodin
+     */
+    public boolean isComodin()
+    {
+        return comodin;
+    }
+
+    /**
+     * @param comodin the comodin to set
+     */
+    public void setComodin(boolean comodin)
+    {
+        this.comodin = comodin;
     }
 
 }

@@ -39,6 +39,7 @@ public class Mine implements  Runnable
     private double  collectQuantity;
     private double earnigs;
     AdministrarNombresMineros Nombre=new AdministrarNombresMineros();
+    private int asignedMinersComodin;
 
     public Mine()
     {
@@ -215,9 +216,17 @@ public class Mine implements  Runnable
             }
             i++;
         }
-        for (int j = 1; j <= this.asignedminers; j++)
+        for (int j = 1; j <= this.asignedminers-this.asignedMinersComodin; j++)
         {
             this.listMiners.add(new Miner(x, y, direction, Nombre.getNombreMinero()));
+            this.listMiners.getLast().setMovement(true);
+            listThread.add(new Thread(this.listMiners.getLast()));
+            listThread.getLast().start();
+        }
+        for (int j = 1; j <= this.asignedMinersComodin; j++)
+        {
+            this.listMiners.add(new Miner(x, y, direction, Nombre.getNombreMinero()));
+            this.listMiners.getLast().setComodin(true);
             this.listMiners.getLast().setMovement(true);
             listThread.add(new Thread(this.listMiners.getLast()));
             listThread.getLast().start();
@@ -961,6 +970,22 @@ public class Mine implements  Runnable
      */
     public void setEarnigs(double earnigs) {
         this.earnigs = earnigs;
+    }
+
+    /**
+     * @return the asignedMinersComodin
+     */
+    public int getAsignedMinersComodin()
+    {
+        return asignedMinersComodin;
+    }
+
+    /**
+     * @param asignedMinersComodin the asignedMinersComodin to set
+     */
+    public void setAsignedMinersComodin(int asignedMinersComodin)
+    {
+        this.asignedMinersComodin = asignedMinersComodin;
     }
 
     

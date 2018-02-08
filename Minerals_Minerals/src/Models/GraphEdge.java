@@ -7,7 +7,8 @@ package Models;
 
 /**
  *
- * @author Chinche
+ * @author Esteban Herrera y Jaime Bernal
+ * Clase arista del grafo
  */
 public class GraphEdge
 {
@@ -18,7 +19,11 @@ public class GraphEdge
     public GraphEdge()
     {
     }
-
+/**
+ * Crea nueva arista
+ * @param endNode nodo final
+ * @param value valor de la arista
+ */
     public GraphEdge(GraphNode endNode, int value)
     {
         this.endNode = endNode;

@@ -20,7 +20,8 @@ import org.jfree.data.xy.XYSeriesCollection;
 
 /**
  *
- * @author Chinche
+ * @author Esteban Herrera y Jaime Bernal
+ * Formulario donde se grafica el tiempo de ejecución del algoritmo de dijkstra
  */
 public class DijkstraGrapich extends java.awt.Dialog {
     
@@ -28,7 +29,11 @@ public class DijkstraGrapich extends java.awt.Dialog {
     LinkedList<Mine> listMine;
     
      /**
-     * Creates new form DijkstraGrapich
+     * Crea nuevo formulario DijkstraGrapich
+     * @param parent padre de la ventana
+     * @param modal si el padre puede trabajar
+     * @param listMines lista de minas
+     * 
      */
     
     public DijkstraGrapich(java.awt.Frame parent, boolean modal,LinkedList<Mine> listMines) {

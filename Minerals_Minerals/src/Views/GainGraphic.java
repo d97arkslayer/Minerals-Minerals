@@ -20,7 +20,7 @@ import org.jfree.data.xy.XYSeriesCollection;
 
 /**
  *
- * @author Chinche
+ * @author Esteban Herrera y Jaime Bernal
  */
 public class GainGraphic extends java.awt.Dialog
 {
@@ -30,12 +30,12 @@ public class GainGraphic extends java.awt.Dialog
     LinkedList<Integer> listGain;
 
     /**
-     * Creates new form GainGrapich
+     * Crea nuevo fromulario GainGrapich
      *
-     * @param parent
-     * @param modal
-     * @param listMines
-     * @param totalgain
+     * @param parent padre del formulario
+     * @param modal  indicador si el padre puede trabajar
+     * @param listMines lista de minas del programa
+     * @param totalgain ganancia total de la empresa
      */
     public GainGraphic(java.awt.Frame parent, boolean modal, LinkedList<Mine> listMines, LinkedList<Integer> totalgain)
     {

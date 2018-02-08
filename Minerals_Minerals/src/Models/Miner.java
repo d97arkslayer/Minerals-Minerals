@@ -8,7 +8,7 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author darkd
+ * @author Esteban Herrera y Jaime Bernal
  */
 public class Miner implements Runnable
 {
@@ -44,7 +44,13 @@ public class Miner implements Runnable
     public Miner()
     {
     }
-
+/**
+ * Constructor
+ * @param x posicion x
+ * @param y posicion y 
+ * @param direction direccion hacia donde va
+ * @param nombre nombre del minero
+ */
     public Miner(int x, int y, int direction, String nombre)
     {
         this.x = x;
@@ -73,8 +79,9 @@ public class Miner implements Runnable
         loadSprite();
     }
 
-    /*
-        Se inicializa los vectores para la animacion de acuerdo a la direccion
+   
+    /**
+     * Se inicializa los vectores para la animacion de acuerdo a la direccion
      */
     public void loadSprite()
     {

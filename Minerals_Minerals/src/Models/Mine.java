@@ -12,7 +12,8 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author darkd
+ * @author Esteban Herrera y Jaime Bernal
+ * Clase mina
  */
 public class Mine implements  Runnable
 {
@@ -45,7 +46,13 @@ public class Mine implements  Runnable
     {
         this.matrix = new LinkedList<>();
     }
-
+    
+    /**
+     * 
+     * @param id identificador
+     * @param metal metal de la mina
+     * @param amount cantidad de mineral en la mina
+     */
     public Mine(int id, String metal, double amount)
     {
         this.id = id;
@@ -61,6 +68,9 @@ public class Mine implements  Runnable
         this.loadDeposits();
     }
     
+    /**
+     * Cargar la cantidad total de mienral de la mina
+     */
     private void loadDeposits()
     {
         for (int i = 0; i < this.matrix.size(); i++) 
@@ -76,7 +86,9 @@ public class Mine implements  Runnable
             }
         }
     }
-
+/**
+ * Calcular la ganancia total de la mina de acuerdo a los mineros asignados
+ */
     public void calculateGain()
     {
         if(this.asignedminers<this.amountOfDeposits)
@@ -92,6 +104,12 @@ public class Mine implements  Runnable
             this.getTotalGain().add((this.amountOfDeposits*250)-((this.asignedminers-this.amountOfDeposits)*120));
         }
     }
+    
+    /**
+     * Obtener ruta para un minero
+     * @param end nodo final
+     * @param miner minero al cual se la va asignar la ruta
+     */
     public void route(String end, int miner)
     {
         String start = "";
@@ -115,7 +133,11 @@ public class Mine implements  Runnable
         this.listMiners.get(miner).changeDirection(newDirection(miner));
         this.listMiners.get(miner).setState("mover");
     }
-
+    /**
+     * Cambiar direccion del minero
+     * @param miner minero
+     * @return nueva direccion
+     */
     public int newDirection(int miner)
     {
         int i = 0;
@@ -149,7 +171,10 @@ public class Mine implements  Runnable
             return 0;
         return 0;
     }
-
+    
+    /**
+     * metodo para calcular el dijkstra
+     */
     public void dijkstra()
     {
         long startTime = System.currentTimeMillis();
@@ -170,6 +195,11 @@ public class Mine implements  Runnable
         this.dikjstraTime.add(System.currentTimeMillis() - startTime); 
         System.out.println(this.dikjstraTime.getLast());
     }
+    
+    /**
+     * Crea los mineros de acuerdo a la cantidad asignada
+     * @param listThread lista de hilos para el movimiento
+     */
     
     public void createMiners(LinkedList<Thread> listThread)
     {
@@ -233,7 +263,9 @@ public class Mine implements  Runnable
         }
     }
     
-    
+    /**
+     * Metodo que crea el grafo basandose en el inicio de la mina, depositos y caminos con cambi de direccion
+     */
     public void createGraph()
     {
         this.graph=new Graph();
@@ -257,7 +289,11 @@ public class Mine implements  Runnable
         }
         printGraph();
     }
-
+/**
+ * obtiene adyacentes nombres
+ * @param node nodo al cual le vamos encontrar los adyacentes
+ * @return retorna HashMap con el nodo final y el peso de la arista
+ */
     private LinkedHashMap<String, Integer> getAdjacentNodes(String node)
     {
         LinkedHashMap<String, Integer> result = new LinkedHashMap<>();
@@ -303,7 +339,15 @@ public class Mine implements  Runnable
         }
         return result;
     }
-
+/**
+ * obtiene valor de la arista
+ * @param i posicion fila
+ * @param j posicicon columna
+ * @param direction dirección por la cual estoy buscando
+ * @param name Nombre nodo
+ * @param cont cantidad de cuadros pasados
+ * @return el valor de la arista
+ */
     private int getEdgeValue(int i, int j, int direction, String name, int cont)
     {
         if (direction == 1)
@@ -356,7 +400,13 @@ public class Mine implements  Runnable
                     return 0;
         return 0;
     }
-
+/**
+ * Nombre nodo adyacente
+ * @param i fila    
+ * @param j columa
+ * @param direction direccion donde se busca
+ * @return  retrona nombre del adyacente
+ */
     private String getAdjacentNodeName(int i, int j, int direction)
     {
         if (direction == 1)
@@ -429,7 +479,10 @@ public class Mine implements  Runnable
                     return "";
         return "";
     }
-
+    /**
+     * obtiene los nombre de los nodos
+     * @return lista con los nombre de los nodos
+     */
     private LinkedList<String> getNameGraphNodes()
     {
         LinkedList<String> result = new LinkedList<>();
@@ -482,6 +535,13 @@ public class Mine implements  Runnable
         return result;
     }
 
+    /**
+     * obtener nombre nodo
+     * @param i fila 
+     * @param j columna
+     * @param direction dirección en la cual se busca
+     * @return Nombre del nodo
+     */
     private String getNameNode(int i, int j, int direction)
     {
         String result = "";
@@ -589,7 +649,9 @@ public class Mine implements  Runnable
             }
         }
     }
-    
+   /**
+    * limpiar lista de mineros
+    */ 
     private void cleanMiners()
     {
         for(Miner miners:this.listMiners)

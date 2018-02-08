@@ -11,8 +11,9 @@ import java.awt.Graphics;
 
 /**
  *
- * @author darkd
- * @param <T>
+ * @author Esteban Herrera y Jaime Bernal
+ * Panel donde se pinta la mina que se esta creando
+ * 
  */
 public class PanelOfBuilder<T> extends javax.swing.JPanel
 {

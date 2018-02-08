@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author darkd
+ * @author Esteban Herrera y Jaime Bernal
  */
 public class StartBackground extends javax.swing.JPanel
 {

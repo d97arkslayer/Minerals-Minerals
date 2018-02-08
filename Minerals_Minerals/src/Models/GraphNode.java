@@ -7,7 +7,8 @@ package Models;
 
 /**
  *
- * @author Chinche
+ * @author Esteban Herrera y Jaime Bernal
+ * Clase nodo grafo
  */
 public class GraphNode
 {

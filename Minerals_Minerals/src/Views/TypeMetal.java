@@ -9,7 +9,8 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author darkd
+ * @author Esteban Herrera y Jaime Bernal
+ * Formulario que indica el metal y cantidad ´de mineral por cada deposito
  */
 public class TypeMetal extends javax.swing.JDialog
 {
@@ -21,8 +22,8 @@ public class TypeMetal extends javax.swing.JDialog
     /**
      * Creates new form TypeMetal
      *
-     * @param parent
-     * @param modal
+     * @param parent padre del formulario
+     * @param modal si el padre puede trabajar
      */
     public TypeMetal(java.awt.Frame parent, boolean modal)
     {
@@ -183,9 +184,9 @@ public class TypeMetal extends javax.swing.JDialog
         }
     }//GEN-LAST:event_buttonOkActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+   // /**
+    // * @param args the command line arguments
+     //*/
 //    public static void main(String args[])
 //    {
 //        /* Set the Nimbus look and feel */
@@ -278,9 +279,9 @@ public class TypeMetal extends javax.swing.JDialog
         return amount;
     }
 
-    /**
-     * @param amount the amount to set
-     */
+    ///**
+     //* @param amount the amount to set
+     //*/
     public void setAmount(double amount)
     {
         this.amount = amount;

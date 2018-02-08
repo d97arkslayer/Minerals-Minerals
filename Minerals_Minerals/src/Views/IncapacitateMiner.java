@@ -12,7 +12,8 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Chinche
+ * @author Esteban Herrera y Jaime Bernal
+ * Formulario para incapacitar mineros
  */
 public class IncapacitateMiner extends javax.swing.JDialog
 {
@@ -24,11 +25,11 @@ public class IncapacitateMiner extends javax.swing.JDialog
     LinkedList<Miner> myMiners = new LinkedList<>();
 
     /**
-     * Creates new form IncapacitateMiner
+     * Crea nuevo formulario IncapacitateMiner
      *
-     * @param parent
-     * @param modal
-     * @param listMines
+     * @param parent padre del formulario
+     * @param modal si el padre puede trabajar
+     * @param listMines lista de minas
      */
     public IncapacitateMiner(java.awt.Frame parent, boolean modal, LinkedList<Mine> listMines)
     {
@@ -40,7 +41,9 @@ public class IncapacitateMiner extends javax.swing.JDialog
 
         this.setVisible(true);
     }
-
+    /**
+     * Carga la tabla en la cual se muestra la informacion de los mineros
+     */
     public void load()
     {
 
@@ -156,7 +159,12 @@ public class IncapacitateMiner extends javax.swing.JDialog
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /**
+     * 
+     * @param listMines  lista mineros
+     *  agrega todo los mineros a una lista
+     */
     public void minersToList(LinkedList<Mine> listMines)
     {
         for (Mine m : listMines)
@@ -176,9 +184,9 @@ public class IncapacitateMiner extends javax.swing.JDialog
         this.load();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    ///**
+    // * @param args the command line arguments
+     //*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

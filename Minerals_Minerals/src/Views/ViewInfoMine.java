@@ -15,8 +15,8 @@ public class ViewInfoMine extends javax.swing.JDialog
 
     /**
      * Creates new form ViewInfoMine
-     * @param parent
-     * @param modal
+     * @param parent padre 
+     * @param modal si el padre puede ejecutar
      */
     public ViewInfoMine(java.awt.Frame parent, boolean modal)
     {

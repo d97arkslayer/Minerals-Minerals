@@ -9,7 +9,8 @@ import java.awt.Toolkit;
 
 /**
  *
- * @author darkd
+ * @author Esteban Herrera y Jaime Bernal
+ * Formulario de inicio
  */
 public class Start extends javax.swing.JDialog
 {
@@ -17,10 +18,10 @@ public class Start extends javax.swing.JDialog
     Minerals_Minerals father;
 
     /**
-     * Creates new form Start
-     * @param parent
-     * @param modal
-     * @param father
+     * Crea nuevo fomulario Start
+     * @param parent padre del fromulario
+     * @param modal si el padre puede trabajar
+     * @param father ventena principal
      */
     public Start(java.awt.Frame parent, boolean modal, Minerals_Minerals father)
     {
@@ -134,9 +135,9 @@ public class Start extends javax.swing.JDialog
         this.dispose();
     }//GEN-LAST:event_newButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    ///**
+     //* @param args the command line arguments
+     //*/
 //    public static void main(String args[])
 //    {
 //        /* Set the Nimbus look and feel */

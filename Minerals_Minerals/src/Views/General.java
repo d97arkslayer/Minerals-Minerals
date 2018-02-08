@@ -11,7 +11,8 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author darkd
+ * @author Esteban Herrera y Jaime Bernal
+ * Formulario donde se inserta la infromacion de los mineros
  */
 public class General extends javax.swing.JDialog
 {
@@ -20,12 +21,12 @@ public class General extends javax.swing.JDialog
     private InformationMineJson generalInformation;
 
     /**
-     * Creates new form Begin
+     * Crea nuevo formulario Begin
      *
-     * @param parent
-     * @param modal
-     * @param minersInfo
-     * @param generalInformation
+     * @param parent padre del formulario
+     * @param modal si el padre puede trabajar
+     * @param minersInfo informacion del mineros
+     * @param generalInformation  informacion general
      */
     public General(java.awt.Frame parent, boolean modal, MinersJson minersInfo, InformationMineJson generalInformation)
     {
@@ -347,9 +348,9 @@ public class General extends javax.swing.JDialog
         // TODO add your handling code here:
     }//GEN-LAST:event_copperMinersActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    ///**
+    // * @param args the command line arguments
+     //*/
 //    public static void main(String args[])
 //    {
 //        /* Set the Nimbus look and feel */

@@ -10,7 +10,8 @@ import java.util.LinkedList;
 
 /**
  *
- * @author Chinche
+ * @author Eseban Herrera y Jaime Bernal
+ * Clase grafo 
  */
 public class Graph
 {
@@ -26,18 +27,35 @@ public class Graph
         this.listEdges = new LinkedList<>();
         this.dijkstra = new LinkedHashMap<>();
     }
-
+    
+    /**
+     * Constructor
+     * @param listNodes lista de nodos del grafo
+     * @param listEdges lista de aristas del grafo
+     */
+    
     public Graph(LinkedList<GraphNode> listNodes, LinkedList<LinkedList<GraphEdge>> listEdges)
     {
         this.listNodes = listNodes;
         this.listEdges = listEdges;
     }
-
+    /**
+     * Metodo que agregar un nodo al grafo
+     * @param nombre nombre del grafo
+     */
+    
     public void addNode(String nombre)
     {
         this.getListNodes().add(new GraphNode(nombre));
         this.getListEdges().add(new LinkedList<GraphEdge>());
     }
+    
+    /**
+     * Metodo que agrega la arista de acuerdo al nodo inicial
+     * @param start Nombre nodo inical
+     * @param end Nombre nodo final
+     * @param value valor de la arista
+     */
 
     public void addEdge(String start, String end, int value)
     {
@@ -51,6 +69,11 @@ public class Graph
             }
         }
     }
+    
+    /**
+     * Metodo que calcula el dijlkstra partiendo desde un nodo inicial
+     * @param initialNodeName Nodo inicial sobre el cual se va operar el dijkstra
+     */
     
     public void calculateDijkstra(String initialNodeName)
     {
@@ -72,6 +95,11 @@ public class Graph
         dijkstra(nextNode);
         System.out.println(this.dijkstra);
     }
+    
+    /**
+     * Metodo que determina el disktra, camino mininmo hasta el punto
+     * @param nodeName  Nombre del nodo
+     */
     
     private void dijkstra(String nodeName)
     {
@@ -114,7 +142,10 @@ public class Graph
             dijkstra(nextNode);
         }
     }
-    
+    /**
+     * Metodo que busca el camino minimo
+     * @return retorna un nodo de camino minimo
+     */
     private String searchLower()
     {
         String result="";
@@ -141,6 +172,11 @@ public class Graph
         return  result;
     }
     
+    /**
+     * agrega la infomación del camino minimo desde un nodo inical
+     * @param initialNode Nodo inicial
+     */
+    
     private void fillDijkstra(int initialNode)
     {
         for (GraphEdge edge : this.listEdges.get(initialNode)) 
@@ -148,13 +184,24 @@ public class Graph
             this.dijkstra.put(edge.getEndNode().getName(), edge.getValue()+";"+this.listNodes.get(initialNode).getName());
         }
     }
-    
+    /**
+     * Obtener ruta que debe seguir el camino
+     * @param start nodo inical
+     * @param end nodo final
+     * @return lista con los nodos que debe visitar
+     */
     public LinkedList<String> getRoute(String start,String end)
     {
         LinkedList<String> result=new LinkedList<>();
         return getRoute(start, end, result) ;
     }
-    
+    /**
+     * Obtener ruta atraves de metodo recursivo
+     * @param start nodo inicial
+     * @param end nodo final
+     * @param route ruta la cual se esta creando
+     * @return ruta final de camino
+     */
     private LinkedList<String> getRoute(String start,String end,LinkedList<String> route)
     {
         route.add(end);

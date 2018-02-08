@@ -18,7 +18,8 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Chinche
+ * @author Esteban Herrera y Jaime Bernal
+ * Panel que pinta todo lo sucedido en su mina
  */
 public class Panel extends javax.swing.JPanel implements Runnable
 {
@@ -26,7 +27,7 @@ public class Panel extends javax.swing.JPanel implements Runnable
     private Mine mine = new Mine();
 
     /**
-     * Creates new form Panel
+     *Crea nuevo Panel
      */
     public Panel()
     {
@@ -37,7 +38,7 @@ public class Panel extends javax.swing.JPanel implements Runnable
         initComponents();
         this.setPreferredSize(new Dimension(w, h));
     }
-
+    
     public void minersFollowRoute()
     {
        if(!this.mine.getListMiners().isEmpty())

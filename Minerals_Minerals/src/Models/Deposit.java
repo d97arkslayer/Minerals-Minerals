@@ -9,7 +9,8 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author Chinche
+ * @author Esteban Herrera y Jaime Bernal
+ * Clase la cual es el deposito de mineral en la mina
  */
 public class Deposit
 {
@@ -25,6 +26,12 @@ public class Deposit
     {
     }
 
+    /**
+     * Constructor
+     * @param x posicion en el eje x
+     * @param y posicion en el eje y
+     * @param i tipo de metal de la mina
+     */
     public Deposit(int x, int y, String i)
     {
         this.x = x;

@@ -30,7 +30,8 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author darkd
+ * @author Esteban Herrera y Jaime Bernal
+ * Formulario principal
  */
 public class Minerals_Minerals extends javax.swing.JFrame implements Runnable
 {
@@ -64,7 +65,10 @@ public class Minerals_Minerals extends javax.swing.JFrame implements Runnable
         //General b = new General(this, true);
         Start b = new Start(this, true, this);
     }
-
+    
+    /**
+     * Carga la infrmación inicial
+     */
     public void initialInformation()
     {
         this.totalMineros.setText(this.minersInfo.getTotalMineros() + "");
@@ -80,6 +84,13 @@ public class Minerals_Minerals extends javax.swing.JFrame implements Runnable
         this.gananciaCobre.setText(this.generalInformation.getGananciaCobre() + " $");
     }
 
+     /**
+      * Algoritmo que se encarga de asignar a los mineros en las minas obteniendo 
+      * la mayor ganacia por minas en cada uno de los momentos
+      * @param listMines lista de mineros a los  cuales se van a asignar 
+      * @param miners Cantidad de mineros que se va a asignar
+      * @param comodin Inidicador se se va a asignar a mineros tipo comodin
+      */
     public void locateMiners(LinkedList<Mine> listMines, int miners,boolean comodin)
     {
         int[] minersByMine = new int[listMines.size()];
@@ -338,7 +349,11 @@ public class Minerals_Minerals extends javax.swing.JFrame implements Runnable
         }
 
     }
-
+/**
+ * Funcion que al tener mas de una mina con la gancia mayor se desempata
+ * @param options Indicador de minas empatadas
+ * @return La posición de la mina en la cual se debe asignar
+ */
     public int betterOption(LinkedList<Integer> options)
     {
         int option = 0;

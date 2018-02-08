@@ -16,7 +16,8 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Chinche
+ * @author Esteban Herrera y Jaime Bernal
+ * Administrador de leer el archivo de donde se obtienen los nombre de los mineros
  */
 public class AdministrarNombresMineros {
     
@@ -25,6 +26,10 @@ public class AdministrarNombresMineros {
     String linea;
     LinkedList<String> listWords;
 
+    /**
+     * Apertura dle archivo
+     */
+    
     public AdministrarNombresMineros() {
         try {
             this.listWords=new LinkedList<>();
@@ -44,6 +49,10 @@ public class AdministrarNombresMineros {
         }
     }
     
+    /**
+     * Obtener nombre del minero del archivo
+     * @return El nombre del minero que lo solicita
+     */
     public String getNombreMinero()
     {
         int position = (int) (Math.random() * (this.listWords.size())) + 0;

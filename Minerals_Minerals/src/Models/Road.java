@@ -9,7 +9,8 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author Chinche
+ * @author Esteban Herrera y Jaime Bernal
+ * Camino de la mina
  */
 public class Road
 {

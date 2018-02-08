@@ -7,8 +7,8 @@ package Models;
 
 /**
  *
- * @author darkd
- * @param <T>
+ * @author Esteban Herrera y Jaime Bernak
+ * Seccion del mapa
  */
 public class SectionMap<T>
 {

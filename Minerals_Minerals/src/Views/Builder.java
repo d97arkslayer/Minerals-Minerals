@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Views;
 
 import Models.*;
@@ -13,7 +9,8 @@ import java.util.LinkedList;
 
 /**
  *
- * @author darkd
+ * @author Esteban Herrera y Jaime Bernal
+ * Formulario donde se realiza la creación de una mina
  */
 public class Builder extends java.awt.Dialog
 {
@@ -25,9 +22,9 @@ public class Builder extends java.awt.Dialog
     /**
      * Creates new form Maker
      *
-     * @param parent
-     * @param modal
-     * @param m
+     * @param parent padre del formulario
+     * @param modal indicador si el padre puede funcionar si esta activo
+     * @param m mina la cual se esta creando
      */
     public Builder(java.awt.Frame parent, boolean modal, Mine m)
     {
@@ -652,9 +649,9 @@ public class Builder extends java.awt.Dialog
             });
         });
     }
-    /**
-     * @param args the command line arguments
-     */
+   // /**
+    // * @param args the command line arguments
+     //*/
 //    public static void main(String args[])
 //    {
 //        

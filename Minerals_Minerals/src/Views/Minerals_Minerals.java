@@ -1040,6 +1040,12 @@ public class Minerals_Minerals extends javax.swing.JFrame implements Runnable
     }//GEN-LAST:event_gananciaPlataActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        for(Panel panel :this.pruebapanels)
+        {
+            for (int i = 0; i < panel.getMine().getListMiners().size(); i++) {
+                panel.getMine().getListMiners().get(i).setMover(false);
+            }
+        }
         LinkedList<Mine> listMines = new LinkedList<>();
         for (Panel panel : this.pruebapanels)
         {
@@ -1384,9 +1390,14 @@ public class Minerals_Minerals extends javax.swing.JFrame implements Runnable
         {
             for (Panel panel : this.pruebapanels)
             {
+                
                 panel.minersFollowRoute();
                 panel.minersMovement();
                 panel.minersWork();
+                if(panel.getMine().isEliminarMinero())
+                {
+                    panel.getMine().cleanMiners();
+                }
             }
         }
     }

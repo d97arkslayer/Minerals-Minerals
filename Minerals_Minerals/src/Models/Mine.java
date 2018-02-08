@@ -41,6 +41,8 @@ public class Mine implements  Runnable
     private double earnigs;
     AdministrarNombresMineros Nombre=new AdministrarNombresMineros();
     private int asignedMinersComodin;
+    private boolean eliminarMinero;
+    
 
     public Mine()
     {
@@ -65,6 +67,7 @@ public class Mine implements  Runnable
         this.amountOfDeposits = 0;
         this.graph = new Graph();
         this.totalGain=new LinkedList<>();
+        eliminarMinero=false;
         this.loadDeposits();
     }
     
@@ -652,7 +655,7 @@ public class Mine implements  Runnable
    /**
     * limpiar lista de mineros
     */ 
-    private void cleanMiners()
+    public void cleanMiners()
     {
         for(Miner miners:this.listMiners)
         {
@@ -1003,7 +1006,7 @@ public class Mine implements  Runnable
                     }
                     if(this.amountOfDeposits==0)
                     {
-                        cleanMiners();
+                        this.setEliminarMinero(true);
                     }
                 }
             }
@@ -1048,6 +1051,20 @@ public class Mine implements  Runnable
     public void setAsignedMinersComodin(int asignedMinersComodin)
     {
         this.asignedMinersComodin = asignedMinersComodin;
+    }
+
+    /**
+     * @return the eliminarMinero
+     */
+    public boolean isEliminarMinero() {
+        return eliminarMinero;
+    }
+
+    /**
+     * @param eliminarMinero the eliminarMinero to set
+     */
+    public void setEliminarMinero(boolean eliminarMinero) {
+        this.eliminarMinero = eliminarMinero;
     }
 
     

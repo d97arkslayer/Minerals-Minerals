@@ -40,6 +40,7 @@ public class Miner implements Runnable
     private Double earnings;
     private boolean status;
     private boolean comodin;
+    private boolean mover;
 
     public Miner()
     {
@@ -76,7 +77,9 @@ public class Miner implements Runnable
         this.earnings = 0.0;
         this.status = true;
         this.comodin=false;
+        this.mover=true;
         loadSprite();
+        
     }
 
    
@@ -170,9 +173,11 @@ public class Miner implements Runnable
     @Override
     public void run()
     {
-        while (this.movement)
+        while (true)
         {
-            if (this.state.equalsIgnoreCase("mover"))
+            if(this.isMover())
+            {
+                if (this.state.equalsIgnoreCase("mover"))
             {
                 switch (this.direction)
                 {
@@ -198,6 +203,8 @@ public class Miner implements Runnable
             }
             if (this.state.equalsIgnoreCase("trabajo"))
                 sprite();
+            }
+            
             try
             {
                 Thread.sleep(150);
@@ -638,6 +645,20 @@ public class Miner implements Runnable
     public void setComodin(boolean comodin)
     {
         this.comodin = comodin;
+    }
+
+    /**
+     * @return the mover
+     */
+    public boolean isMover() {
+        return mover;
+    }
+
+    /**
+     * @param mover the mover to set
+     */
+    public void setMover(boolean mover) {
+        this.mover = mover;
     }
 
 }

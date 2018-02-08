@@ -34,7 +34,7 @@ public class AdministrarNombresMineros {
         try {
             this.listWords=new LinkedList<>();
             try {
-                this.fill=new FileReader(new File("E:\\Backup\\Datos\\Universidad de Caldas\\Ingenieria en sistemas y computacion\\Octavo semestre\\Analisis y diseño de algoritmos\\Proyecto\\Codigo\\Minerals-Minerals\\Minerals-Minerals\\Minerals_Minerals\\src\\ArchivoNombres\\Nombres.txt"));
+                this.fill=new FileReader(new File("C:\\Users\\Chinche\\Documents\\NetBeansProjects\\Minerals-Minerals\\Minerals_Minerals\\src\\ArchivoNombres\\Nombres.txt"));
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(AdministrarNombresMineros.class.getName()).log(Level.SEVERE, null, ex);
             }
